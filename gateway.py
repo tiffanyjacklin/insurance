@@ -16,9 +16,9 @@ class GatewayService:
         categories = self.insurance_rpc.get_all_category()
         return categories['code'],json.dumps(categories['data'])
 
-    @http('GET', '/insurance_category/<int:id>')
+    @http('GET', '/insurance_category/<int:id_kategori>')
     def get_category_by_id(self, request, id):
-        category = self.insurance_rpc.get_category_by_id(id)
+        category = self.insurance_rpc.get_category_by_id(id_kategori)
         return category['code'],json.dumps(category['data'])
 
     @http('POST', '/insurance_category')
@@ -28,11 +28,11 @@ class GatewayService:
         category = self.insurance_rpc.add_category(nama_kategori)   
         return category['code'],json.dumps(category['data'])
 
-    @http('PUT', '/insurance_category/<int:id>')
-    def edit_category(self, request, id):
+    @http('PUT', '/insurance_category/<int:id_kategori>')
+    def edit_category(self, request, id_kategori):
         data = json.loads(request.get_data(as_text=True))
         nama_kategori = data.get('nama_kategori')
-        category = self.insurance_rpc.edit_category(id, nama_kategori)
+        category = self.insurance_rpc.edit_category(id_kategori, nama_kategori)
         return category['code'],json.dumps(category['data'])
 
 
@@ -43,14 +43,14 @@ class GatewayService:
         insurances = self.insurance_rpc.get_all_insurance()
         return insurances['code'],json.dumps(insurances['data'])
 
-    @http('GET', '/insurance/insurance_category/<int:id>')
-    def get_insurance_by_category(self, request, id):
-        insurances = self.insurance_rpc.get_insurance_by_category(id)
+    @http('GET', '/insurance/insurance_category/<int:id_kategori>')
+    def get_insurance_by_category(self, request, id_kategori):
+        insurances = self.insurance_rpc.get_insurance_by_category(id_kategori)
         return insurances['code'],json.dumps(insurances['data'])
 
-    @http('GET', '/insurance/<int:id>')
-    def get_insurance_by_id(self, request, id):
-        insurance = self.insurance_rpc.get_insurance_by_id(id)
+    @http('GET', '/insurance/<int:id_tipe_asuransi>')
+    def get_insurance_by_id(self, request, id_tipe_asuransi):
+        insurance = self.insurance_rpc.get_insurance_by_id(id_tipe_asuransi)
         return insurance['code'],json.dumps(insurance['data'])
 
     @http('POST', '/insurance')
@@ -65,8 +65,8 @@ class GatewayService:
         insurance       = self.insurance_rpc.add_insurance(id_kategori, status_tipe, nama_tipe, premi_asuransi, keterangan, syarat_umum)   
         return insurance['code'],json.dumps(insurance['data'])
 
-    @http('PUT', '/insurance/<int:id>')
-    def edit_insurance(self, request, id):
+    @http('PUT', '/insurance/<int:id_tipe_asuransi>')
+    def edit_insurance(self, request, id_tipe_asuransi):
         data = json.loads(request.get_data(as_text=True))
         id_kategori     = data.get('id_kategori')
         status_tipe     = data.get('status_tipe')
@@ -74,20 +74,20 @@ class GatewayService:
         premi_asuransi  = data.get('premi_asuransi')
         keterangan      = data.get('keterangan')
         syarat_umum     = data.get('syarat_umum')
-        insurance = self.insurance_rpc.edit_insurance(id, id_kategori, status_tipe, nama_tipe, premi_asuransi, keterangan, syarat_umum)
+        insurance = self.insurance_rpc.edit_insurance(id_tipe_asuransi, id_kategori, status_tipe, nama_tipe, premi_asuransi, keterangan, syarat_umum)
         return insurance['code'],json.dumps(insurance['data'])
 
 
     # COVERAGE ASURANSI
 
-    @http('GET', '/coverage/insurance/<int:id>')
-    def get_coverage_by_insurance_type(self, request, id):
-        coverages = self.insurance_rpc.get_coverage_by_insurance_type(id)
+    @http('GET', '/coverage/insurance/<int:id_tipe_asuransi>')
+    def get_coverage_by_insurance_type(self, request, id_tipe_asuransi):
+        coverages = self.insurance_rpc.get_coverage_by_insurance_type(id_tipe_asuransi)
         return coverages['code'],json.dumps(coverages['data'])
 
-    http('GET', '/coverage/<int:id>')
-    def get_coverage_by_id(self, request, id):
-        coverages = self.insurance_rpc.get_coverage_by_id(id)
+    http('GET', '/coverage/<int:id_coverage>')
+    def get_coverage_by_id(self, request, id_coverage):
+        coverages = self.insurance_rpc.get_coverage_by_id(id_coverage)
         return coverage['code'],json.dumps(coverage['data'])
 
     @http('POST', '/coverage')
@@ -101,15 +101,15 @@ class GatewayService:
         coverage = self.insurance_rpc.add_coverage(id_tipe_asuransi, status_tipe, coverage, detail_coverage, status_coverage)   
         return coverage['code'],json.dumps(coverage['data'])
 
-    @http('PUT', '/coverage/<int:id>')
-    def edit_coverage(self, request, id):
+    @http('PUT', '/coverage/<int:id_coverage>')
+    def edit_coverage(self, request, id_coverage):
         data = json.loads(request.get_data(as_text=True))
         id_tipe_asuransi = data.get('id_tipe_asuransi')
         status_tipe      = data.get('status_tipe')
         coverage         = data.get('coverage')
         detail_coverage  = data.get('detail_coverage')
         status_coverage  = data.get('status_coverage')
-        coverage = self.insurance_rpc.edit_coverage(id, id_tipe_asuransi, status_tipe, coverage, detail_coverage, status_coverage)
+        coverage = self.insurance_rpc.edit_coverage(id_coverage, id_tipe_asuransi, status_tipe, coverage, detail_coverage, status_coverage)
         return coverage['code'],json.dumps(coverage['data'])
 
 
@@ -159,7 +159,7 @@ class GatewayService:
         purchase = self.insurance_rpc.get_all_purchase_by_user(id_user)
         return purchase['code'],json.dumps(purchase['data'])
 
-    @http('GET', '/insurance_purchase/<int:id_pembayaran>')
+    @http('GET', '/insurance_purchase/<int:id_pembelian>')
     def get_purchase_by_id(self, request, id_pembelian):
         purchase = self.insurance_rpc.get_purchase_by_id(id_pembelian)
         return purchase['code'],json.dumps(purchase['data'])

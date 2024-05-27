@@ -3,6 +3,7 @@ from nameko.extensions import DependencyProvider
 import mysql.connector
 from mysql.connector import Error
 from mysql.connector import pooling
+from datetime import datetime
 
 class DatabaseWrapper:
 
@@ -38,7 +39,7 @@ class DatabaseWrapper:
     def add_category(self, nama_kategori):
         cursor = self.connection.cursor(dictionary=True)
         sql_insert_category = "INSERT INTO `kategori_asuransi` (`nama_kategori`) VALUES ('%s');"
-        cursor.execute(sql_insert_category, (nama_kategori))
+        cursor.execute(sql_insert_category, (nama_kategori,))
         self.connection.commit() 
         cursor.close()
         return True
@@ -197,7 +198,7 @@ class DatabaseWrapper:
     def get_all_claim_by_user(self, id_user):
         cursor = self.connection.cursor(dictionary=True)
         result = []
-        sql = "SELECT * FROM klaim_asuransi WHERE id_user = %s"
+        sql = "SELECT * FROM `klaim_asuransi` WHERE `id_user` = %s"
         cursor.execute(sql,(id_user,))
         for row in cursor.fetchall():
             result.append({
@@ -214,23 +215,24 @@ class DatabaseWrapper:
     
     def get_claim_by_id(self, id_klaim):
         cursor = self.connection.cursor(dictionary=True)
-        sql = "SELECT * FROM klaim_asuransi WHERE id_klaim = %s"
+        sql = "SELECT * FROM `klaim_asuransi` WHERE `id_klaim` = %s"
         cursor.execute(sql,(id_klaim,))
         result = cursor.fetchone()
         cursor.close()
         return result
     
     def add_claim(self, id_user, id_pembelian, id_pembayaran, link, status):
+        current_timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         cursor = self.connection.cursor(dictionary=True)
-        sql = "INSERT INTO klaim_asuransi (id_user, id_pembelian, id_pembayaran, link, status) VALUES (%s, %s, %s, %s, %s)"
-        cursor.execute(sql, ( id_user, id_pembelian, id_pembayaran, link, status))
+        sql = "INSERT INTO `klaim_asuransi` (`id_user`, `id_pembelian`, `id_pembayaran`, `link_bukti`, `timestamp` `status_klaim`) VALUES (%s, %s, %s, %s, '%s', %s)"
+        cursor.execute(sql, ( id_user, id_pembelian, id_pembayaran, link, current_timestamp, status))
         self.connection.commit()
         cursor.close()
         return True
     
     def edit_status_claim(self, id_klaim, status):
         cursor = self.connection.cursor(dictionary=True)
-        sql = "UPDATE klaim_asuransi SET status = %s WHERE id_klaim = %s"
+        sql = "UPDATE `klaim_asuransi` SET status = %s WHERE `id_klaim` = %s"
         cursor.execute(sql, (status, id_klaim))
         self.connection.commit()
         cursor.close()
@@ -241,23 +243,10 @@ class DatabaseWrapper:
     def get_all_payment_by_user(self, id_user):
         cursor = self.connection.cursor(dictionary=True)
         result = []
-        sql = "SELECT * FROM pembayaran_asuransi WHERE id_user = %s"
+        sql = "SELECT * FROM `pembayaran_asuransi` WHERE `id_user` = %s"
         cursor.execute(sql,(id_user,))
-        # for row in cursor.fetchall():
-        #     result.append({
-        #         'id_pembayaran': row['id_pembayaran'],
-        #         'id_user': row['id_user'],
-        #         'id_pembelian': row['id_pembelian'],
-        #         'timestamp': row['timestamp'],
-        #         'total_bayar': row['total_bayar'],
-        #         'pajak': row['pajak'],
-        #         'jenis_pembayaran': row['jenis_pembayaran'],
-        #         'nomor_kartu': row['nomor_kartu'],
-        #         'nomor_rekening': row['nomor_rekening'],
-        #         'nomor_telepon': row['nomor_telepon']
-        #     })
         for row in cursor.fetchall():
-            data = {
+            result.append({
                 'id_pembayaran': row['id_pembayaran'],
                 'id_user': row['id_user'],
                 'id_pembelian': row['id_pembelian'],
@@ -265,14 +254,27 @@ class DatabaseWrapper:
                 'total_bayar': row['total_bayar'],
                 'pajak': row['pajak'],
                 'jenis_pembayaran': row['jenis_pembayaran'],
-            }
+                'nomor_kartu': row['nomor_kartu'],
+                'nomor_rekening': row['nomor_rekening'],
+                'nomor_telepon': row['nomor_telepon']
+            })
+        # for row in cursor.fetchall():
+        #     data = {
+        #         'id_pembayaran': row['id_pembayaran'],
+        #         'id_user': row['id_user'],
+        #         'id_pembelian': row['id_pembelian'],
+        #         'timestamp': row['timestamp'],
+        #         'total_bayar': row['total_bayar'],
+        #         'pajak': row['pajak'],
+        #         'jenis_pembayaran': row['jenis_pembayaran'],
+        #     }
 
-            if row['nomor_kartu'] is not None:
-                data['nomor_kartu'] = row['nomor_kartu']
-            if row['nomor_rekening'] is not None:
-                data['nomor_rekening'] = row['nomor_rekening']
-            if row['nomor_telepon'] is not None:
-                data['nomor_telepon'] = row['nomor_telepon']
+        #     if row['nomor_kartu'] is not None:
+        #         data['nomor_kartu'] = row['nomor_kartu']
+        #     if row['nomor_rekening'] is not None:
+        #         data['nomor_rekening'] = row['nomor_rekening']
+        #     if row['nomor_telepon'] is not None:
+        #         data['nomor_telepon'] = row['nomor_telepon']
         
         result.append(data)
 
@@ -281,26 +283,28 @@ class DatabaseWrapper:
     
     def get_payment_by_id(self, id_pembayaran):
         cursor = self.connection.cursor(dictionary=True)
-        sql = "SELECT * FROM pembayaran_asuransi WHERE id_pembayaran = %s"
+        sql = "SELECT * FROM `pembayaran_asuransi` WHERE `id_pembayaran` = %s"
         cursor.execute(sql,(id_pembayaran,))
         result = cursor.fetchone()
         cursor.close()
         return result
     
     def add_payment(self, id_user, id_pembelian, total_bayar, jenis_pembayaran, nomor_kartu, nomor_rekening, nomor_telepon):
+        current_timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         cursor = self.connection.cursor(dictionary=True)
-        sql = "INSERT INTO pembayaran_asuransi (id_user, id_pembelian, total_bayar, pajak, jenis_pembayaran, nomor_kartu, nomor_rekening, nomor_telepon) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(sql, (id_user, id_pembelian, total_bayar, total_bayar * 0.11, jenis_pembayaran, nomor_kartu, nomor_rekening, nomor_telepon))
+        sql = "INSERT INTO `pembayaran_asuransi` (`id_user`, `id_pembelian`, `timestamp`, `total_bayar`, `pajak`, `jenis_pembayaran`, `nomor_kartu`, `nomor_rekening`, `nomor_telepon`) VALUES (%s, %s, '%s', %s, %s, %s, %s, %s, %s)"
+        cursor.execute(sql, (id_user, id_pembelian, current_timestamp, total_bayar, total_bayar * 0.11, jenis_pembayaran, nomor_kartu, nomor_rekening, nomor_telepon))
         self.connection.commit()
         cursor.close()
         return True
     
+
     # Pembelian Asuransi
 
     def get_all_purchase_by_user(self, id_user):
         cursor = self.connection.cursor(dictionary=True)
         result = []
-        sql = "SELECT * FROM pembelian_asuransi WHERE id_user = %s"
+        sql = "SELECT * FROM `pembelian_asuransi` WHERE `id_user` = %s"
         cursor.execute(sql,(id_user,))
         for row in cursor.fetchall():
             result.append({
@@ -316,18 +320,28 @@ class DatabaseWrapper:
     
     def get_purchase_by_id(self, id_pembelian):
         cursor = self.connection.cursor(dictionary=True)
-        sql = "SELECT * FROM pembelian_asuransi WHERE id_pembelian = %s"
+        sql = "SELECT * FROM `pembelian_asuransi` WHERE `id_pembelian` = %s"
         cursor.execute(sql,(id_pembelian,))
         result = cursor.fetchone()
         cursor.close()
         return result
     
     def add_purchase(self, id_user, id_booking, id_tipe_asuransi, jumlah, status_pembayaran):
+        current_timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         cursor = self.connection.cursor(dictionary=True)
-        sql = "INSERT INTO pembelian_asuransi (id_user, id_booking, id_tipe_asuransi, jumlah, status_pembayaran) VALUES (%s, %s, %s, %s, %s)"
-        cursor.execute(sql, ( id_user, id_booking, id_tipe_asuransi, jumlah, status_pembayaran))
+        sql = "INSERT INTO `pembelian_asuransi` (`id_user`, `id_booking`, `id_tipe_asuransi`, `jumlah`, `date_time`, `status_pembayaran`) VALUES (%s, %s, %s, %s, '%s', %s)"
+        cursor.execute(sql, (id_user, id_booking, id_tipe_asuransi, jumlah, current_timestamp, status_pembayaran))
         self.connection.commit()
         cursor.close()
+        return True
+
+    def edit_purchase_status(self, id_pembelian, status_pembayaran):
+        cursor = self.connection.cursor(dictionary=True)
+        sql_update_purchase = "UPDATE `pembelian_asuransi` SET `status_pembayaran` = %s WHERE `id_pembelian` = %s;"
+        cursor.execute(sql_update_purchase, (status_pembayaran, id_pembelian))
+        self.connection.commit()
+        cursor.close()
+        
         return True
 
     def __del__(self):

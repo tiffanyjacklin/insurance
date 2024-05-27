@@ -150,7 +150,7 @@ class insuranceService:
                     'code': 404,
                     'data': 'Coverage Invalid.'
                 }
-            else if category: 
+            elif category: 
                 coverages = self.database.get_coverage_by_insurance_type(id)
                 if coverages is None:
                     return {
@@ -212,35 +212,79 @@ class insuranceService:
     @rpc
     def get_all_claim_by_user(self, id_user):
         user_claim = self.database.get_all_claim_by_user(id_user)
-        return {'code': 200,'data': user_claim}
+        return {
+            'code': 200,
+            'data': user_claim
+        }
     
     @rpc
     def get_claim_by_id(self, id_klaim):
         claim = self.database.get_claim_by_id(id_klaim)
-        return {'code': 200,'data': claim}
+        return {
+            'code': 200,
+            'data': claim
+        }
 
     @rpc
     def add_claim(self, id_user, id_pembelian, id_pembayaran, link, status):
         claim = self.database.add_claim(id_user, id_pembelian, id_pembayaran, link, status)
-        return {'code': 200,'data': claim}
+        return {
+            'code': 200,
+            'data': claim
+        }
     
+    @rpc
+    def edit_claim(self, id_klaim, status_klaim):
+        input_claim = self.database.get_claim_by_id(id_klaim)
+        if input_claim is None:
+            return {
+                'code': 404,
+                "data": "Claim ID Invalid."
+            }
+
+        claim = self.database.edit_claim(id_klaim, status_klaim)
+        return {
+            'code': 200,
+            'data': claim
+        }
 
     # Pembayaran Asuransi
 
     @rpc
     def get_all_payment_by_user(self, id_user):
         user_payment = self.database.get_all_payment_by_user(id_user)
-        return {'code': 200,'data': user_payment}
+        return {
+            'code': 200,
+            'data': user_payment
+        }
     
     @rpc
     def get_payment_by_id(self, id_pembayaran):
         user_payment = self.database.get_payment_by_id(id_pembayaran)
-        return {'code': 200,'data': user_payment}
+        return {
+            'code': 200,
+            'data': user_payment
+        }
     
     @rpc
     def add_payment(self, id_user, id_pembelian, total_bayar, jenis_pembayaran, nomor_kartu, nomor_rekening, nomor_telepon):
-        payment = self.database.add_payment(id_user, id_pembelian, total_bayar, jenis_pembayaran, nomor_kartu, nomor_rekening, nomor_telepon)
-        return {'code': 200,'data': payment}
+        input_purchase = self.database.get_purchase_by_id(id_pembelian)
+        if input_purchase:
+            status = self.edit_purchase_status(id_pembelian, 1)
+            if status: 
+                payment = self.database.add_payment(id_user, id_pembelian, total_bayar, jenis_pembayaran, nomor_kartu, nomor_rekening, nomor_telepon)
+                return {
+                    'code': 200,
+                    'data': payment
+                }
+            return {
+                'code': 404,
+                "data": "Status Invalid."
+        }
+        return {
+                'code': 404,
+                "data": "Claim ID Invalid."
+        }
     
 
     # Pembelian Asuransi
@@ -248,14 +292,23 @@ class insuranceService:
     @rpc
     def get_all_purchase_by_user(self, id_user):
         purchase = self.database.get_all_purchase_by_user(id_user)
-        return {'code': 200,'data': purchase}
+        return {
+            'code': 200,
+            'data': purchase
+        }
     
     @rpc
     def get_purchase_by_id(self, id_pembelian):
         purchase = self.database.get_purchase_by_id(id_pembelian)
-        return {'code': 200,'data': purchase}
+        return {
+            'code': 200,
+            'data': purchase
+        }
     
     @rpc
     def add_purchase(self, id_user, id_booking, id_tipe_asuransi, jumlah, status_pembayaran):
         purchase = self.database.add_purchase(id_user, id_booking, id_tipe_asuransi, jumlah, status_pembayaran)
-        return {'code': 200,'data': purchase}
+        return {
+            'code': 200,
+            'data': purchase
+        }
