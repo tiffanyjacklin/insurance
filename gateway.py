@@ -17,7 +17,7 @@ class GatewayService:
         return categories['code'],json.dumps(categories['data'])
 
     @http('GET', '/insurance_category/<int:id_kategori>')
-    def get_category_by_id(self, request, id):
+    def get_category_by_id(self, request, id_kategori):
         category = self.insurance_rpc.get_category_by_id(id_kategori)
         return category['code'],json.dumps(category['data'])
 
@@ -85,9 +85,9 @@ class GatewayService:
         coverages = self.insurance_rpc.get_coverage_by_insurance_type(id_tipe_asuransi)
         return coverages['code'],json.dumps(coverages['data'])
 
-    http('GET', '/coverage/<int:id_coverage>')
+    @http('GET', '/coverage/<int:id_coverage>')
     def get_coverage_by_id(self, request, id_coverage):
-        coverages = self.insurance_rpc.get_coverage_by_id(id_coverage)
+        coverage = self.insurance_rpc.get_coverage_by_id(id_coverage)
         return coverage['code'],json.dumps(coverage['data'])
 
     @http('POST', '/coverage')
@@ -113,45 +113,6 @@ class GatewayService:
         return coverage['code'],json.dumps(coverage['data'])
 
 
-    # Klaim Asuransi
-
-    @http('GET', '/insurance_claim/all/<int:id_user>')
-    def get_all_claim_by_user(self, request, id_user):
-        claim = self.insurance_rpc.get_all_claim_by_user(id_user)
-        return claim['code'],json.dumps(claim['data'])
-    
-    @http('GET', '/insurance_claim/<int:id_klaim>')
-    def get_all_claim_by_user(self, request, id_klaim):
-        claim = self.insurance_rpc.get_claim_by_id(id_klaim)
-        return claim['code'],json.dumps(claim['data'])
-
-    @http('POST', '/claim_insurance/add')
-    def add_claim(self, request):
-        data = json.loads(request.get_data(as_text=True))
-        data['status'] = data.get('status', 0)
-        claim = self.insurance_rpc.add_claim(data['id_user'], data['id_pembelian'], data['id_pembayaran'], data['link'], data['status'])
-        return claim['code'],json.dumps(claim['data'])
-    
-
-    # Pembayaran Asuransi
-
-    @http('GET', '/insurance_payment/all/<int:id_user>')
-    def get_all_payment_by_user(self, request, id_user):
-        payment = self.insurance_rpc.get_all_payment_by_user(id_user)
-        return payment['code'],json.dumps(payment['data'])
-    
-    @http('GET', '/insurance_payment/<int:id_pembayaran>')
-    def get_payment_by_id(self, request, id_pembayaran):
-        payment = self.insurance_rpc.get_payment_by_id(id_pembayaran)
-        return payment['code'],json.dumps(payment['data'])
-    
-    @http('POST', '/insurance_payment/add')
-    def add_payment(self, request):
-        data = json.loads(request.get_data(as_text=True))
-        payment = self.insurance_rpc.add_payment(data['id_user'], data['id_pembelian'], data['total_bayar'], data['jenis_pembayaran'], data['nomor_kartu'], data['nomor_rekening'], data['nomor_telepon'])
-        return payment['code'],json.dumps(payment['data'])
-    
-
     # Pembelian Asuransi
     
     @http('GET', '/insurance_purchase/all/<int:id_user>')
@@ -169,3 +130,49 @@ class GatewayService:
         data = json.loads(request.get_data(as_text=True))
         purchase = self.insurance_rpc.add_purchase(data['id_user'], data['id_booking'], data['id_tipe_asuransi'], data['jumlah'], data['status_pembayaran'])
         return purchase['code'],json.dumps(purchase['data'])
+    
+
+    # Pembayaran Asuransi
+
+    @http('GET', '/insurance_payment/all/<int:id_user>')
+    def get_all_payment_by_user(self, request, id_user):
+        payment = self.insurance_rpc.get_all_payment_by_user(id_user)
+        return payment['code'],json.dumps(payment['data'])
+    
+    @http('GET', '/insurance_payment/<int:id_pembayaran>')
+    def get_payment_by_id(self, request, id_pembayaran):
+        payment = self.insurance_rpc.get_payment_by_id(id_pembayaran)
+        return payment['code'],json.dumps(payment['data'])
+    
+    @http('POST', '/insurance_payment/add')
+    def add_payment(self, request):
+        data = json.loads(request.get_data(as_text=True))
+        payment = self.insurance_rpc.add_payment(data['id_user'], data['id_pembelian'], data['jenis_pembayaran'], data['nomor'])
+        return payment['code'],json.dumps(payment['data'])
+    
+
+    # Klaim Asuransi
+
+    @http('GET', '/insurance_claim/all/<int:id_user>')
+    def get_all_claim_by_user(self, request, id_user):
+        claim = self.insurance_rpc.get_all_claim_by_user(id_user)
+        return claim['code'],json.dumps(claim['data'])
+    
+    @http('GET', '/insurance_claim/<int:id_klaim>')
+    def get_all_claim_by_user(self, request, id_klaim):
+        claim = self.insurance_rpc.get_claim_by_id(id_klaim)
+        return claim['code'],json.dumps(claim['data'])
+
+    @http('POST', '/insurance_claim/add')
+    def add_claim(self, request):
+        data = json.loads(request.get_data(as_text=True))
+        data['status_klaim'] = data.get('status_klaim', 0)
+        claim = self.insurance_rpc.add_claim(data['id_user'], data['id_pembelian'], data['id_pembayaran'], data['link_bukti'], data['status_klaim'])
+        return claim['code'],json.dumps(claim['data'])
+
+    @http('PUT', '/insurance_claim/<int:id_klaim>')
+    def edit_status_claim(self, request, id_klaim):
+        data = json.loads(request.get_data(as_text=True))
+        status_klaim = data.get('status_klaim')
+        insurance = self.insurance_rpc.edit_status_claim(id_klaim, status_klaim)
+        return insurance['code'],json.dumps(insurance['data'])
