@@ -56,8 +56,8 @@ class insuranceService:
         }
 
     @rpc
-    def get_category_by_id(self, id):
-        category = self.database.get_category_by_id(id)
+    def get_category_by_name(self, nama):
+        category = self.database.get_category_by_name(nama)
         if category is None:
             return {
                     'code': 404,
@@ -67,6 +67,7 @@ class insuranceService:
             'code': 200,
             'data': category
         }
+    
 
     @rpc
     def add_category(self, nama_kategori):        
@@ -103,10 +104,10 @@ class insuranceService:
         }
 
     @rpc
-    def get_insurance_by_category(self, id):
-        category = self.database.get_category_by_id(id)
+    def get_insurance_by_category(self, kategori):
+        category = self.database.get_category_by_name(kategori)
         if category:
-            insurances = self.database.get_insurance_by_category(id)
+            insurances = self.database.get_insurance_by_category(kategori)
             return {
                 'code': 200,
                 'data': insurances
@@ -118,8 +119,8 @@ class insuranceService:
         }
 
     @rpc
-    def get_insurance_by_id(self, id):
-        insurance = self.database.get_insurance_by_id(id)
+    def get_insurance_by_category_and_id(self, kategori, id_tipe_asuransi):
+        insurance = self.database.get_insurance_by_category_and_id(kategori, id_tipe_asuransi)
         if insurance is None:
             return {
                     'code': 404,
@@ -131,108 +132,27 @@ class insuranceService:
         }
 
     @rpc
-    def add_insurance(self, id_kategori, status_tipe, nama_tipe, premi_asuransi, keterangan, syarat_umum):        
-        insurance = self.database.add_insurance(id_kategori, status_tipe, nama_tipe, premi_asuransi, keterangan, syarat_umum)
+    def add_insurance(self, kategori, tujuan, empat, enam, delapan, sepuluh, limabelas, duapuluh, dualima, tigapuluh, setahun):        
+        insurance = self.database.add_insurance(kategori, tujuan, empat, enam, delapan, sepuluh, limabelas, duapuluh, dualima, tigapuluh, setahun)
         return {
             'code': 200,
             'data': insurance
         }
 
     @rpc
-    def edit_insurance(self, id_tipe_asuransi, id_kategori, status_tipe, nama_tipe, premi_asuransi, keterangan, syarat_umum):
-        tipe_asuransi = self.database.get_insurance_by_id(id_tipe_asuransi)
+    def edit_insurance(self, kategori, id_tipe_asuransi, tujuan, empat, enam, delapan, sepuluh, limabelas, duapuluh, dualima, tigapuluh, setahun):
+        tipe_asuransi = self.database.get_insurance_by_category_and_id(kategori, id_tipe_asuransi)
         if tipe_asuransi is None:
             return {
                 'code': 404,
                 "data": "Insurance Type ID Invalid."
             }
          
-        insurance = self.database.edit_insurance(id_tipe_asuransi, id_kategori, status_tipe, nama_tipe, premi_asuransi, keterangan, syarat_umum)
+        insurance = self.database.edit_insurance(kategori, id_tipe_asuransi, tujuan, empat, enam, delapan, sepuluh, limabelas, duapuluh, dualima, tigapuluh, setahun)
         return {
             'code': 200,
             'data': insurance
         }
-
-
-    # COVERAGE ASURANSI
-
-    @rpc
-    def get_coverage_by_insurance_type(self, id_tipe_asuransi):
-        tipe_asuransi = self.database.get_insurance_by_id(id_tipe_asuransi)
-        if tipe_asuransi:
-            category = self.database.get_insurance_category_by_id(id_tipe_asuransi)
-            if category == 1:
-                status = self.database.get_insurance_status_by_id(id_tipe_asuransi)
-                if status:
-                    coverages = self.database.get_coverage_by_status_type(status)
-                    return {
-                        'code': 200,
-                        'data': coverages
-                    }
-                return {
-                    'code': 404,
-                    'data': status
-                    # 'data': 'Coverage Invalid.'
-                }
-            elif category: 
-                coverages = self.database.get_coverage_by_insurance_type(id_tipe_asuransi)
-                if coverages is None:
-                    return {
-                            'code': 404,
-                            'data': category
-                            # 'data': 'Coverage Invalid.'
-                            }
-                return {
-                    'code': 200,
-                    'data': coverages
-                }
-            return {
-                'code': 400,
-                'data': category
-                # 'data': 'Category ID Invalid.'
-            }
-        return {
-            'code': 400,
-            'data': tipe_asuransi
-            # 'data': 'Insurance Type ID Invalid.'
-        }
-
-    @rpc
-    def get_coverage_by_id(self, id_coverage):
-        coverage = self.database.get_coverage_by_id(id_coverage)
-        if coverage is None:
-            return {
-                    'code': 404,
-                    'data': 'Coverage ID Invalid.'
-                    }
-        return {
-            'code': 200,
-            'data': coverage
-        }
-
-    @rpc
-    def add_coverage(self, id_tipe_asuransi, status_tipe, coverage, detail_coverage, status_coverage):        
-        coverage = self.database.add_coverage(id_tipe_asuransi, status_tipe, coverage, detail_coverage, status_coverage)
-        return {
-            'code': 200,
-            'data': coverage
-        }
-
-    @rpc
-    def edit_coverage(self, id_coverage, id_tipe_asuransi, status_tipe, coverage, detail_coverage, status_coverage):
-        input_coverage = self.database.get_coverage_by_id(id_coverage)
-        if input_coverage is None:
-            return {
-                'code': 404,
-                "data": "Category ID Invalid."
-            }
-    
-        coverage = self.database.edit_coverage(id_coverage, id_tipe_asuransi, status_tipe, coverage, detail_coverage, status_coverage)
-        return {
-            'code': 200,
-            'data': coverage
-        }
-
 
     # Pembelian Asuransi
 
@@ -245,16 +165,26 @@ class insuranceService:
         }
     
     @rpc
-    def get_purchase_by_id(self, id_pembelian):
-        purchase = self.database.get_purchase_by_id(id_pembelian)
+    def get_purchase_by_id(self, id_user, id_pembelian):
+        purchase = self.database.get_purchase_by_id(id_user, id_pembelian)
         return {
             'code': 200,
             'data': purchase
         }
-    
+
     @rpc
-    def add_purchase(self, id_user, id_booking, id_tipe_asuransi, jumlah, status_pembayaran):
-        purchase = self.database.add_purchase(id_user, id_booking, id_tipe_asuransi, jumlah, status_pembayaran)
+    def get_purchase_total_by_id(self, id_pembelian):
+        purchase = self.database.get_purchase_total_by_id(id_pembelian)
+        return {
+            'code': 200,
+            'data': purchase
+        }
+
+    @rpc
+    def add_purchase(self, id_user, id_booking, kategori, tujuan, adult, child, start_date, end_date):
+    # def add_purchase(self, id_user, id_booking, id_tipe_asuransi, jumlah, status_pembayaran):
+        # purchase = self.database.add_purchase(id_user, id_booking, id_tipe_asuransi, jumlah, status_pembayaran)
+        purchase = self.database.add_purchase(id_user, id_booking, kategori, tujuan, adult, child, start_date, end_date)
         return {
             'code': 200,
             'data': purchase
@@ -280,8 +210,8 @@ class insuranceService:
         }
     
     @rpc
-    def get_payment_by_id(self, id_pembayaran):
-        user_payment = self.database.get_payment_by_id(id_pembayaran)
+    def get_payment_by_id(self, id_user, id_pembayaran):
+        user_payment = self.database.get_payment_by_id(id_user, id_pembayaran)
         return {
             'code': 200,
             'data': user_payment
@@ -289,7 +219,7 @@ class insuranceService:
     
     @rpc
     def add_payment(self, id_user, id_pembelian, jenis_pembayaran, nomor):
-        input_purchase = self.database.get_purchase_by_id(id_pembelian)
+        input_purchase = self.database.get_purchase_by_id(id_user, id_pembelian)
         if input_purchase:
             status = self.edit_purchase_status(id_pembelian, 1)
             if status: 
@@ -307,44 +237,3 @@ class insuranceService:
                 "data": "Claim ID Invalid."
         }
     
-
-    # Klaim Asuransi
-
-    @rpc
-    def get_all_claim_by_user(self, id_user):
-        user_claim = self.database.get_all_claim_by_user(id_user)
-        return {
-            'code': 200,
-            'data': user_claim
-        }
-    
-    @rpc
-    def get_claim_by_id(self, id_klaim):
-        claim = self.database.get_claim_by_id(id_klaim)
-        return {
-            'code': 200,
-            'data': claim
-        }
-
-    @rpc
-    def add_claim(self, id_user, id_pembelian, id_pembayaran, link, status):
-        claim = self.database.add_claim(id_user, id_pembelian, id_pembayaran, link, status)
-        return {
-            'code': 200,
-            'data': claim
-        }
-    
-    @rpc
-    def edit_status_claim(self, id_klaim, status_klaim):
-        input_claim = self.database.get_claim_by_id(id_klaim)
-        if input_claim is None:
-            return {
-                'code': 404,
-                "data": "Claim ID Invalid."
-            }
-
-        claim = self.database.edit_status_claim(id_klaim, status_klaim)
-        return {
-            'code': 200,
-            'data': claim
-        }

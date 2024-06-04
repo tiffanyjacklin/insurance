@@ -11,24 +11,24 @@ class GatewayService:
 
     # KATEGORI ASURANSI
 
-    @http('GET', '/insurance_category')
+    @http('GET', '/insurance')
     def get_all_category(self, request):
         categories = self.insurance_rpc.get_all_category()
         return categories['code'],json.dumps(categories['data'])
 
-    @http('GET', '/insurance_category/<int:id_kategori>')
-    def get_category_by_id(self, request, id_kategori):
-        category = self.insurance_rpc.get_category_by_id(id_kategori)
+    @http('GET', '/insurance/<kategori>')
+    def get_category_by_name(self, request, kategori):
+        category = self.insurance_rpc.get_category_by_name(kategori)
         return category['code'],json.dumps(category['data'])
 
-    @http('POST', '/insurance_category')
+    @http('POST', '/insurance')
     def add_category(self, request):
         data = json.loads(request.get_data(as_text=True))
         nama_kategori = data.get('nama_kategori')
         category = self.insurance_rpc.add_category(nama_kategori)   
         return category['code'],json.dumps(category['data'])
 
-    @http('PUT', '/insurance_category/<int:id_kategori>')
+    @http('PUT', '/insurance/<int:id_kategori>')
     def edit_category(self, request, id_kategori):
         data = json.loads(request.get_data(as_text=True))
         nama_kategori = data.get('nama_kategori')
@@ -38,141 +38,86 @@ class GatewayService:
 
     # TIPE ASURANSI
 
-    @http('GET', '/insurance')
+    @http('GET', '/insurance/all')
     def get_all_insurance(self, request):
         insurances = self.insurance_rpc.get_all_insurance()
         return insurances['code'],json.dumps(insurances['data'])
 
-    @http('GET', '/insurance/insurance_category/<int:id_kategori>')
-    def get_insurance_by_category(self, request, id_kategori):
-        insurances = self.insurance_rpc.get_insurance_by_category(id_kategori)
+    @http('GET', '/insurance/<kategori>/all')
+    def get_insurance_by_category(self, request, kategori):
+        insurances = self.insurance_rpc.get_insurance_by_category(kategori)
         return insurances['code'],json.dumps(insurances['data'])
 
-    @http('GET', '/insurance/<int:id_tipe_asuransi>')
-    def get_insurance_by_id(self, request, id_tipe_asuransi):
-        insurance = self.insurance_rpc.get_insurance_by_id(id_tipe_asuransi)
+    @http('GET', '/insurance/<kategori>/<int:id_tipe_asuransi>')
+    def get_insurance_by_category_and_id(self, request, kategori, id_tipe_asuransi):
+        insurance = self.insurance_rpc.get_insurance_by_category_and_id(kategori, id_tipe_asuransi)
         return insurance['code'],json.dumps(insurance['data'])
 
-    @http('POST', '/insurance')
-    def add_insurance(self, request):
+    @http('POST', '/insurance/<kategori>')
+    def add_insurance(self, request, kategori):
         data = json.loads(request.get_data(as_text=True))
-        id_kategori     = data.get('id_kategori')
-        status_tipe     = data.get('status_tipe')
-        nama_tipe       = data.get('nama_tipe')
-        premi_asuransi  = data.get('premi_asuransi')
-        keterangan      = data.get('keterangan')
-        syarat_umum     = data.get('syarat_umum')
-        insurance       = self.insurance_rpc.add_insurance(id_kategori, status_tipe, nama_tipe, premi_asuransi, keterangan, syarat_umum)   
+        tujuan    = data.get('tujuan')
+        empat     = data.get('empat')
+        enam      = data.get('enam')
+        delapan   = data.get('delapan')
+        sepuluh   = data.get('sepuluh')
+        limabelas = data.get('limabelas')
+        duapuluh  = data.get('duapuluh')
+        dualima   = data.get('dualima')
+        tigapuluh = data.get('tigapuluh')
+        setahun   = data.get('setahun')
+        insurance = self.insurance_rpc.add_insurance(kategori, tujuan, empat, enam, delapan, sepuluh, limabelas, duapuluh, dualima, tigapuluh, setahun)   
         return insurance['code'],json.dumps(insurance['data'])
 
-    @http('PUT', '/insurance/<int:id_tipe_asuransi>')
-    def edit_insurance(self, request, id_tipe_asuransi):
+    @http('PUT', '/insurance/<kategori>/<int:id_tipe_asuransi>')
+    def edit_insurance(self, request, kategori, id_tipe_asuransi):
         data = json.loads(request.get_data(as_text=True))
-        id_kategori     = data.get('id_kategori')
-        status_tipe     = data.get('status_tipe')
-        nama_tipe       = data.get('nama_tipe')
-        premi_asuransi  = data.get('premi_asuransi')
-        keterangan      = data.get('keterangan')
-        syarat_umum     = data.get('syarat_umum')
-        insurance = self.insurance_rpc.edit_insurance(id_tipe_asuransi, id_kategori, status_tipe, nama_tipe, premi_asuransi, keterangan, syarat_umum)
+        tujuan    = data.get('tujuan')
+        empat     = data.get('empat')
+        enam      = data.get('enam')
+        delapan   = data.get('delapan')
+        sepuluh   = data.get('sepuluh')
+        limabelas = data.get('limabelas')
+        duapuluh  = data.get('duapuluh')
+        dualima   = data.get('dualima')
+        tigapuluh = data.get('tigapuluh')
+        setahun   = data.get('setahun')
+        insurance = self.insurance_rpc.edit_insurance(kategori, id_tipe_asuransi, tujuan, empat, enam, delapan, sepuluh, limabelas, duapuluh, dualima, tigapuluh, setahun)
         return insurance['code'],json.dumps(insurance['data'])
-
-
-    # COVERAGE ASURANSI
-
-    @http('GET', '/coverage/insurance/<int:id_tipe_asuransi>')
-    def get_coverage_by_insurance_type(self, request, id_tipe_asuransi):
-        coverages = self.insurance_rpc.get_coverage_by_insurance_type(id_tipe_asuransi)
-        return coverages['code'],json.dumps(coverages['data'])
-
-    @http('GET', '/coverage/<int:id_coverage>')
-    def get_coverage_by_id(self, request, id_coverage):
-        coverage = self.insurance_rpc.get_coverage_by_id(id_coverage)
-        return coverage['code'],json.dumps(coverage['data'])
-
-    @http('POST', '/coverage')
-    def add_coverage(self, request):
-        data = json.loads(request.get_data(as_text=True))
-        id_tipe_asuransi = data.get('id_tipe_asuransi')
-        status_tipe      = data.get('status_tipe')
-        coverage         = data.get('coverage')
-        detail_coverage  = data.get('detail_coverage')
-        status_coverage  = data.get('status_coverage')
-        coverage = self.insurance_rpc.add_coverage(id_tipe_asuransi, status_tipe, coverage, detail_coverage, status_coverage)   
-        return coverage['code'],json.dumps(coverage['data'])
-
-    @http('PUT', '/coverage/<int:id_coverage>')
-    def edit_coverage(self, request, id_coverage):
-        data = json.loads(request.get_data(as_text=True))
-        id_tipe_asuransi = data.get('id_tipe_asuransi')
-        status_tipe      = data.get('status_tipe')
-        coverage         = data.get('coverage')
-        detail_coverage  = data.get('detail_coverage')
-        status_coverage  = data.get('status_coverage')
-        coverage = self.insurance_rpc.edit_coverage(id_coverage, id_tipe_asuransi, status_tipe, coverage, detail_coverage, status_coverage)
-        return coverage['code'],json.dumps(coverage['data'])
 
 
     # Pembelian Asuransi
     
-    @http('GET', '/insurance_purchase/all/<int:id_user>')
+    @http('GET', '/insurance/purchase/<int:id_user>/all')
     def get_all_purchase_by_user(self, request, id_user):
         purchase = self.insurance_rpc.get_all_purchase_by_user(id_user)
         return purchase['code'],json.dumps(purchase['data'])
 
-    @http('GET', '/insurance_purchase/<int:id_pembelian>')
-    def get_purchase_by_id(self, request, id_pembelian):
-        purchase = self.insurance_rpc.get_purchase_by_id(id_pembelian)
+    @http('GET', '/insurance/purchase/<int:id_user>/<int:id_pembelian>')
+    def get_purchase_by_id(self, request, id_user, id_pembelian):
+        purchase = self.insurance_rpc.get_purchase_by_id(id_user, id_pembelian)
         return purchase['code'],json.dumps(purchase['data'])
     
-    @http('POST', '/insurance_purchase/add')
+    @http('POST', '/insurance/purchase/add')
     def add_purchase(self, request):
         data = json.loads(request.get_data(as_text=True))
-        purchase = self.insurance_rpc.add_purchase(data['id_user'], data['id_booking'], data['id_tipe_asuransi'], data['jumlah'], data['status_pembayaran'])
+        purchase = self.insurance_rpc.add_purchase(data['id_user'], data['id_booking'], data['kategori'], data['tujuan'], data['adult'], data['child'], data['start_date'], data['end_date'])
         return purchase['code'],json.dumps(purchase['data'])
-    
 
     # Pembayaran Asuransi
 
-    @http('GET', '/insurance_payment/all/<int:id_user>')
+    @http('GET', '/insurance/payment/<int:id_user>/all')
     def get_all_payment_by_user(self, request, id_user):
         payment = self.insurance_rpc.get_all_payment_by_user(id_user)
         return payment['code'],json.dumps(payment['data'])
     
-    @http('GET', '/insurance_payment/<int:id_pembayaran>')
-    def get_payment_by_id(self, request, id_pembayaran):
-        payment = self.insurance_rpc.get_payment_by_id(id_pembayaran)
+    @http('GET', '/insurance/payment/<int:id_user>/<int:id_pembayaran>')
+    def get_payment_by_id(self, request, id_user, id_pembayaran):
+        payment = self.insurance_rpc.get_payment_by_id(id_user, id_pembayaran)
         return payment['code'],json.dumps(payment['data'])
     
-    @http('POST', '/insurance_payment/add')
+    @http('POST', '/insurance/payment/add')
     def add_payment(self, request):
         data = json.loads(request.get_data(as_text=True))
         payment = self.insurance_rpc.add_payment(data['id_user'], data['id_pembelian'], data['jenis_pembayaran'], data['nomor'])
         return payment['code'],json.dumps(payment['data'])
-    
-
-    # Klaim Asuransi
-
-    @http('GET', '/insurance_claim/all/<int:id_user>')
-    def get_all_claim_by_user(self, request, id_user):
-        claim = self.insurance_rpc.get_all_claim_by_user(id_user)
-        return claim['code'],json.dumps(claim['data'])
-    
-    @http('GET', '/insurance_claim/<int:id_klaim>')
-    def get_all_claim_by_user(self, request, id_klaim):
-        claim = self.insurance_rpc.get_claim_by_id(id_klaim)
-        return claim['code'],json.dumps(claim['data'])
-
-    @http('POST', '/insurance_claim/add')
-    def add_claim(self, request):
-        data = json.loads(request.get_data(as_text=True))
-        data['status_klaim'] = data.get('status_klaim', 0)
-        claim = self.insurance_rpc.add_claim(data['id_user'], data['id_pembelian'], data['id_pembayaran'], data['link_bukti'], data['status_klaim'])
-        return claim['code'],json.dumps(claim['data'])
-
-    @http('PUT', '/insurance_claim/<int:id_klaim>')
-    def edit_status_claim(self, request, id_klaim):
-        data = json.loads(request.get_data(as_text=True))
-        status_klaim = data.get('status_klaim')
-        insurance = self.insurance_rpc.edit_status_claim(id_klaim, status_klaim)
-        return insurance['code'],json.dumps(insurance['data'])
