@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2024 at 04:23 PM
+-- Generation Time: Jun 04, 2024 at 08:50 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -26,45 +26,68 @@ USE `insurance`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `coverage_asuransi`
+-- Table structure for table `car_insurance`
 --
 
-DROP TABLE IF EXISTS `coverage_asuransi`;
-CREATE TABLE `coverage_asuransi` (
-  `id_coverage` int(11) NOT NULL,
-  `id_tipe_asuransi` int(11) DEFAULT NULL,
-  `status_tipe` int(11) DEFAULT NULL,
-  `coverage` varchar(500) NOT NULL,
-  `detail_coverage` varchar(1000) DEFAULT NULL,
-  `status_coverage` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+DROP TABLE IF EXISTS `car_insurance`;
+CREATE TABLE IF NOT EXISTS `car_insurance` (
+  `id_car` int(11) NOT NULL AUTO_INCREMENT,
+  `provinsi` varchar(50) NOT NULL,
+  `1-4` int(11) NOT NULL,
+  `5-6` int(11) NOT NULL,
+  `7-8` int(11) NOT NULL,
+  `9-10` int(11) NOT NULL,
+  `11-15` int(11) NOT NULL,
+  `16-20` int(11) NOT NULL,
+  `21-25` int(11) NOT NULL,
+  `26-30` int(11) NOT NULL,
+  `366` int(11) NOT NULL,
+  PRIMARY KEY (`id_car`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `coverage_asuransi`
+-- Dumping data for table `car_insurance`
 --
 
-INSERT INTO `coverage_asuransi` (`id_coverage`, `id_tipe_asuransi`, `status_tipe`, `coverage`, `detail_coverage`, `status_coverage`) VALUES
-(1, 1, 1, 'Keterlambatan Penerbangan', 'Perlindungan Hingga Rp3.000.000. \r\n\r\nJika penerbangan terlambat, anda bisa mendapatkan kompensasi Rp750.000 per 4 jam keterlambatan (total maksimal sesuai paket dipilih). \r\n\r\nPerlindungan ini hanya berlaku hanya jika asuransi dibeli selambatanya 2 hari sebelum tanggal keberangkatan.', 1),
-(2, 1, 1, 'Keterlambatan Bagasi', 'Perlindungan Hingga Rp500.000. \r\n\r\nApabila bagasi check-in anda terlambat untuk tiba di bandara kedatangan oleh karena kesalahan maskapai, anda dapat mendapatkan santunan sejumlah nominal yang tertera pada ikhtisar polis. \r\n\r\nAnda wajib menyerahkan konfirmasi tertulis dari maskapai yang menyatakan atas keterlambatan.', 1),
-(3, 1, 1, 'Pembatalan Perjalanan', 'Perlindungan Hingga Rp30.000.000. \r\n\r\nJika anda harus membatalkan perjalanan atau pesanan akomodasi karena alasan tertentu, anda akan mendapatkan penggantian untuk biaya yang tidak bisa di-refund. \r\n\r\nAlasan yang berlaku adalah: \r\nJika anda meninggal atau sakit keras; \r\nanggota keluarga meninggal; \r\nTerjadi kerusuhan /demonstrasi mendadak; \r\nterjadi kerusakan parah pada tempat tinggal anda di Indonesia; dan \r\nJika anda dipanggil sebagai saksi oleh pengadilan. \r\n\r\nPerlindungan ini berlaku jika asuransi dibeli setidaknya 7 hari sebelum perjalanan dan untuk alasan yang terjadi dalam 10 hari sebelum perjalanan (kecuali risiko meninggal dunia dan cidera berat akibat kecelakaan).', 1),
-(4, 1, 1, 'Kecelakaan Diri', 'Perlindungan Hingga Rp300.000.000. \r\n\r\nJika anda meninggal duni atau mengalami cacat akibat kecelakaan yang terjadi selama perjalanan, anda bisa mendapatkan kompensasi sesuai keseriusan kondisi. \r\n\r\nKompensasi sebesar 50% dari jumlah perlindungan maksimal akan diberikan untuk kehilangan anggota badan (termasuk pengelihatan pada satu mata), atau 100% untuk kehilangan 2 anggota badan (termasuk pengelihatan pada 2 mata), cacat permanen seluruh tubuh anggota badan, dan kematian. \r\n\r\nJika anda berusia dibawah 17 tahun atau di atas 70 tahun, jumlah kompensasi maksimal 50% dari jumlah perlindungan maksimal. \r\n\r\nAnda juga wajib menyerahkan surat keterangan kematian atau cacat yang dikeluarkan oleh dokter berwenang, maksimal 30 hari setelah kecelakaan.', 1),
-(5, 1, 1, 'Biaya Pengobatan', 'Perlindungan Hingga Rp100.000.000. \r\n\r\nJika anda mengalami kecelakaan atau sakit selama perjalanan, anda bisa mendapatkan penggantian biaya pengobatan. \r\n\r\nJika anda berusia di bawah 17 tahun atau di atas 70 tahun, jumlah kompensasi maksimal 50% dari jumlah perlindungan maksimal. \r\n\r\nAnda juga diwajibkan untuk menyerahkan kwitansi.', 1),
-(6, 1, 1, 'Perlindungan Bagasi', 'Jika bagasi anda hilang atau rusak, anda bisa mendapatkan kompensasi hingga Rp1.000.000 per barang yang hilang (total maksimal Rp5.000.000). \r\n\r\nJumlah kompensasi setara dengan harga asli barang, dikurangi 20% per tahun pemakaian. Anda wajib melaporkan kehilangan dalam waktu 24 jam. \r\n\r\nAnda juga wajib menyerahkan surat laporan polisi atau konfirmasi tertulis dari pihak manajemen transportasi atau hotel.', 1),
-(7, 1, 1, 'Perlindungan keterlambatan penerbangan tidak akan berlaku jika asuransi di beli dalam jangka waktu 1 hari sebelum atau pada tanggal keberangakatan penerbangan.', NULL, 0),
-(8, 1, 1, 'Penggantian jadwal penerbangan atau pembatalan dari pihak maskapai.', NULL, 0),
-(9, 1, 1, 'Anda mengetahui keadaan yang dapat menyebabkan gangguan perjalanan sebelum asuransi dibeli.', NULL, 0),
-(10, 1, 1, 'Perawatan atau pembedahan yang dapat ditunda sampai anda kembali ke Indonesia.', NULL, 0),
-(11, 1, 1, 'Obat-obatan tambahan yang secara medis tidak diperlukan (misalnya balsem, salep, obat anti serangga, Counterpain dan sejenisnya, Betadine dan sejenisnya.', NULL, 0),
-(12, 1, 1, 'Kondisi medis dan penyakit kronis yang sudah ada sebelumnya (misalnya: asma, penyakit jantung, stroke, epilepsi, diabetes, radang usus buntu, dan batu ginjal.', NULL, 0),
-(13, 1, 1, 'Wabah penyakit (termasuk perawatan akibat peraturan karantina di negara yang dikunjungi).', NULL, 0),
-(14, 1, 1, 'Kehamilan dan kelahiran (termasuk cedera atau penyakit terkait) dan penyakit kelamin.', NULL, 0),
-(15, 1, 1, 'Barang yang oleh maskapai dilarang dibawa dalam bagasi (misalnya barang antik, uang dan surat berharga lain, pecah belah).', NULL, 0),
-(16, 1, 1, 'Kehilangan atau kerusakan akibat kelalaian diri sendiri, pemakaian, perang, kerusuhan, atau peraturan pemerintah.', NULL, 0),
-(17, 1, 1, 'Peralatan sewaan.', NULL, 0),
-(18, 1, 1, 'Kehilangan atau kerusakan barang yang dilindungi asuransi lain atau pihak bertanggungjawab lainnya (misalnya hotel atau maskapai).', NULL, 0),
-(19, 1, 1, 'Barang dagangan atau contoh barang dagangan.', NULL, 0),
-(20, 1, 1, 'Simpanan/rekaman data.', NULL, 0),
-(21, 1, 1, 'Barang yang dikirim lebih dulu atau terpisah.', NULL, 0);
+INSERT INTO `car_insurance` (`id_car`, `provinsi`, `1-4`, `5-6`, `7-8`, `9-10`, `11-15`, `16-20`, `21-25`, `26-30`, `366`) VALUES
+(1, 'Nanggroe Aceh Darussalam', 55000, 65000, 85000, 100000, 140000, 190000, 235000, 280000, 1375000),
+(2, 'Sumatra Utara', 55000, 65000, 85000, 100000, 140000, 190000, 235000, 280000, 1375000),
+(3, 'Sumatra Selatan', 55000, 65000, 85000, 100000, 140000, 190000, 235000, 280000, 1375000),
+(4, 'Sumatra Barat', 55000, 65000, 85000, 100000, 140000, 190000, 235000, 280000, 1375000),
+(5, 'Bengkulu', 55000, 65000, 85000, 100000, 140000, 190000, 235000, 280000, 1375000),
+(6, 'Riau', 55000, 65000, 85000, 100000, 140000, 190000, 235000, 280000, 1375000),
+(7, 'Kepulauan Riau', 55000, 65000, 85000, 100000, 140000, 190000, 235000, 280000, 1375000),
+(8, 'Jambi', 55000, 65000, 85000, 100000, 140000, 190000, 235000, 280000, 1375000),
+(9, 'Lampung', 55000, 65000, 85000, 100000, 140000, 190000, 235000, 280000, 1375000),
+(10, 'Bangka Belitung', 55000, 65000, 85000, 100000, 140000, 190000, 235000, 280000, 1375000),
+(11, 'Kalimantan Barat', 60000, 70000, 90000, 110000, 150000, 200000, 250000, 300000, 1500000),
+(12, 'Kalimantan Timur', 60000, 70000, 90000, 110000, 150000, 200000, 250000, 300000, 1500000),
+(13, 'Kalimantan Selatan', 60000, 70000, 90000, 110000, 150000, 200000, 250000, 300000, 1500000),
+(14, 'Kalimantan Tengah', 60000, 70000, 90000, 110000, 150000, 200000, 250000, 300000, 1500000),
+(15, 'Kalimantan Utara', 60000, 70000, 90000, 110000, 150000, 200000, 250000, 300000, 1500000),
+(16, 'Banten', 45000, 50000, 70000, 85000, 115000, 160000, 200000, 240000, 1200000),
+(17, 'DKI Jakarta', 45000, 50000, 70000, 85000, 115000, 160000, 200000, 240000, 1200000),
+(18, 'Jawa Barat', 45000, 50000, 70000, 85000, 115000, 160000, 200000, 240000, 1200000),
+(19, 'Jawa Tengah', 45000, 50000, 70000, 85000, 115000, 160000, 200000, 240000, 1200000),
+(20, 'Daerah Istimewa Yogyakarta', 45000, 50000, 70000, 85000, 115000, 160000, 200000, 240000, 1200000),
+(21, 'Jawa Timur', 45000, 50000, 70000, 85000, 115000, 160000, 200000, 240000, 1200000),
+(22, 'Bali', 47500, 55000, 75000, 90000, 125000, 175000, 215000, 255000, 1250000),
+(23, 'Nusa Tenggara Timur', 50000, 60000, 80000, 95000, 130000, 180000, 220000, 260000, 1300000),
+(24, 'Nusa Tenggara Barat', 50000, 60000, 80000, 95000, 130000, 180000, 220000, 260000, 1300000),
+(25, 'Gorontalo', 52500, 62000, 82000, 98000, 135000, 185000, 225000, 270000, 1350000),
+(26, 'Sulawesi Barat', 52500, 62000, 82000, 98000, 135000, 185000, 225000, 270000, 1350000),
+(27, 'Sulawesi Tengah', 52500, 62000, 82000, 98000, 135000, 185000, 225000, 270000, 1350000),
+(28, 'Sulawesi Utara', 52500, 62000, 82000, 98000, 135000, 185000, 225000, 270000, 1350000),
+(29, 'Sulawesi Tenggara', 52500, 62000, 82000, 98000, 135000, 185000, 225000, 270000, 1350000),
+(30, 'Sulawesi Selatan', 52500, 62000, 82000, 98000, 135000, 185000, 225000, 270000, 1350000),
+(31, 'Maluku Utara', 55000, 65000, 85000, 105000, 145000, 195000, 240000, 285000, 1400000),
+(32, 'Maluku', 55000, 65000, 85000, 105000, 145000, 195000, 240000, 285000, 1400000),
+(33, 'Papua Barat', 60000, 70000, 90000, 110000, 150000, 200000, 250000, 300000, 1500000),
+(34, 'Papua', 60000, 70000, 90000, 110000, 150000, 200000, 250000, 300000, 1500000),
+(35, 'Papua Tengah', 60000, 70000, 90000, 110000, 150000, 200000, 250000, 300000, 1500000),
+(36, 'Papua Pegunungan', 60000, 70000, 90000, 110000, 150000, 200000, 250000, 300000, 1500000),
+(37, 'Papua Selatan', 60000, 70000, 90000, 110000, 150000, 200000, 250000, 300000, 1500000),
+(38, 'Papua Barat Daya', 60000, 70000, 90000, 110000, 150000, 200000, 250000, 300000, 1500000);
 
 -- --------------------------------------------------------
 
@@ -73,10 +96,11 @@ INSERT INTO `coverage_asuransi` (`id_coverage`, `id_tipe_asuransi`, `status_tipe
 --
 
 DROP TABLE IF EXISTS `kategori_asuransi`;
-CREATE TABLE `kategori_asuransi` (
-  `id_kategori` int(11) NOT NULL,
-  `nama_kategori` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE IF NOT EXISTS `kategori_asuransi` (
+  `id_kategori` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_kategori` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_kategori`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kategori_asuransi`
@@ -84,36 +108,7 @@ CREATE TABLE `kategori_asuransi` (
 
 INSERT INTO `kategori_asuransi` (`id_kategori`, `nama_kategori`) VALUES
 (1, 'Travel Insurance'),
-(2, 'Life Insurance'),
-(3, 'Car Insurance'),
-(4, 'Motor Insurance'),
-(5, 'Home Insurance'),
-(6, 'Health Insurance');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `klaim_asuransi`
---
-
-DROP TABLE IF EXISTS `klaim_asuransi`;
-CREATE TABLE `klaim_asuransi` (
-  `id_klaim` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_pembelian` int(11) NOT NULL,
-  `id_pembayaran` int(11) NOT NULL,
-  `link_bukti` varchar(100) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `status_klaim` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `klaim_asuransi`
---
-
-INSERT INTO `klaim_asuransi` (`id_klaim`, `id_user`, `id_pembelian`, `id_pembayaran`, `link_bukti`, `timestamp`, `status_klaim`) VALUES
-(1, 1, 1, 1, 'https://docs.google.com/document/d/1qFBLi4rgIoU03MIqR7ZjZRbD_LCpGv2s48M7hTS7LDM/edit?usp=sharing', '2024-05-27 08:58:33', 1),
-(2, 1, 3, 2, 'https://docs.google.com/document/d/1qFBLi4rgIoU03MIqR7ZjZRbD_LCpGv2s48M7hTS7LDM/edit?usp=sharing', '2024-05-27 09:05:14', 0);
+(2, 'Car Insurance');
 
 -- --------------------------------------------------------
 
@@ -122,8 +117,8 @@ INSERT INTO `klaim_asuransi` (`id_klaim`, `id_user`, `id_pembelian`, `id_pembaya
 --
 
 DROP TABLE IF EXISTS `pembayaran_asuransi`;
-CREATE TABLE `pembayaran_asuransi` (
-  `id_pembayaran` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pembayaran_asuransi` (
+  `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `id_pembelian` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -132,16 +127,19 @@ CREATE TABLE `pembayaran_asuransi` (
   `jenis_pembayaran` int(11) NOT NULL,
   `nomor_kartu` varchar(16) DEFAULT NULL,
   `nomor_rekening` varchar(20) DEFAULT NULL,
-  `nomor_telepon` varchar(13) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `nomor_telepon` varchar(13) DEFAULT NULL,
+  PRIMARY KEY (`id_pembayaran`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pembayaran_asuransi`
 --
 
 INSERT INTO `pembayaran_asuransi` (`id_pembayaran`, `id_user`, `id_pembelian`, `timestamp`, `total_bayar`, `pajak`, `jenis_pembayaran`, `nomor_kartu`, `nomor_rekening`, `nomor_telepon`) VALUES
-(1, 1, 1, '2024-05-27 07:01:00', 125000, 13750, 3, NULL, NULL, '081111111111'),
-(2, 1, 3, '2024-05-27 09:04:50', 115000, 23500, 2, NULL, '1234567890', NULL);
+(1, 1, 1, '2024-06-04 05:20:46', 47500, 5225, 3, NULL, NULL, '081111111111'),
+(2, 1, 3, '2024-06-04 06:48:14', 85000, 9350, 2, NULL, '1234567890', NULL),
+(3, 1, 2, '2024-06-04 05:21:04', 675000, 74250, 3, NULL, NULL, '085512341234'),
+(4, 1, 5, '2024-06-04 06:48:36', 45000, 4950, 3, NULL, NULL, '081111111111');
 
 -- --------------------------------------------------------
 
@@ -150,209 +148,285 @@ INSERT INTO `pembayaran_asuransi` (`id_pembayaran`, `id_user`, `id_pembelian`, `
 --
 
 DROP TABLE IF EXISTS `pembelian_asuransi`;
-CREATE TABLE `pembelian_asuransi` (
-  `id_pembelian` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pembelian_asuransi` (
+  `id_pembelian` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `id_booking` int(11) DEFAULT NULL,
+  `id_kategori` int(11) NOT NULL,
   `id_tipe_asuransi` int(11) NOT NULL,
-  `jumlah` int(11) NOT NULL,
-  `date_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `status_pembayaran` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `jumlah_orang` int(11) NOT NULL,
+  `jumlah_hari` int(11) NOT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `total_bayar` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `status_pembayaran` int(11) NOT NULL,
+  PRIMARY KEY (`id_pembelian`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pembelian_asuransi`
 --
 
-INSERT INTO `pembelian_asuransi` (`id_pembelian`, `id_user`, `id_booking`, `id_tipe_asuransi`, `jumlah`, `date_time`, `status_pembayaran`) VALUES
-(1, 1, NULL, 3, 1, '2024-05-27 06:58:23', 1),
-(2, 1, NULL, 42, 3, '2024-05-27 07:49:07', 0),
-(3, 1, NULL, 2, 2, '2024-05-27 09:01:00', 1);
+INSERT INTO `pembelian_asuransi` (`id_pembelian`, `id_user`, `id_booking`, `id_kategori`, `id_tipe_asuransi`, `jumlah_orang`, `jumlah_hari`, `start_date`, `end_date`, `total_bayar`, `timestamp`, `status_pembayaran`) VALUES
+(1, 1, NULL, 1, 1, 1, 3, '2024-06-07', '2024-06-09', 47500, '2024-06-04 05:17:09', 1),
+(2, 1, NULL, 1, 45, 3, 10, '2024-08-01', '2024-08-10', 675000, '2024-06-04 05:17:32', 1),
+(3, 1, NULL, 2, 2, 2, 7, '2024-06-10', '2024-06-16', 85000, '2024-06-04 06:47:05', 1),
+(4, 1, NULL, 1, 15, 1, 6, '2024-10-13', '2024-10-18', 360000, '2024-06-04 05:19:02', 0),
+(5, 1, NULL, 2, 21, 3, 3, '2024-06-07', '2024-06-09', 45000, '2024-06-04 06:46:38', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipe_asuransi`
+-- Table structure for table `travel_insurance`
 --
 
-DROP TABLE IF EXISTS `tipe_asuransi`;
-CREATE TABLE `tipe_asuransi` (
-  `id_tipe_asuransi` int(11) NOT NULL,
-  `id_kategori` int(11) NOT NULL,
-  `status_tipe` int(11) DEFAULT NULL,
-  `nama_tipe` varchar(100) NOT NULL,
-  `premi_asuransi` int(11) DEFAULT NULL,
-  `keterangan` varchar(1000) DEFAULT NULL,
-  `syarat_umum` varchar(2000) DEFAULT NULL
+DROP TABLE IF EXISTS `travel_insurance`;
+CREATE TABLE IF NOT EXISTS `travel_insurance` (
+  `id_travel` int(11) NOT NULL,
+  `wilayah` int(1) NOT NULL,
+  `negara` varchar(50) NOT NULL,
+  `1-4` int(11) NOT NULL,
+  `5-6` int(11) NOT NULL,
+  `7-8` int(11) NOT NULL,
+  `9-10` int(11) NOT NULL,
+  `11-15` int(11) NOT NULL,
+  `16-20` int(11) NOT NULL,
+  `21-25` int(11) NOT NULL,
+  `26-30` int(11) NOT NULL,
+  `366` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tipe_asuransi`
+-- Dumping data for table `travel_insurance`
 --
 
-INSERT INTO `tipe_asuransi` (`id_tipe_asuransi`, `id_kategori`, `status_tipe`, `nama_tipe`, `premi_asuransi`, `keterangan`, `syarat_umum`) VALUES
-(1, 1, 1, 'Travel Insurance to United States Silver', 60000, 'Akan terbang ke Amerika? Dapatkan asuransi perjalanan ke Amerika Serikat secara online. Meringankan ketidaknyamanan perjalanan Anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(2, 1, 2, 'Travel Insurance to United States Gold', 115000, 'Akan terbang ke Amerika? Dapatkan asuransi perjalanan ke Amerika Serikat secara online. Meringankan ketidaknyamanan perjalanan Anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(3, 1, 3, 'Travel Insurance to United States Platinum', 125000, 'Akan terbang ke Amerika? Dapatkan asuransi perjalanan ke Amerika Serikat secara online. Meringankan ketidaknyamanan perjalanan Anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(4, 1, 1, 'Travel Insurance to Australia Silver', 60000, 'Akan terbang ke Australia? Dapatkan asuransi perjalanan ke Australia online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(5, 1, 2, 'Travel Insurance to Australia Gold', 115000, 'Akan terbang ke Australia? Dapatkan asuransi perjalanan ke Australia online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(6, 1, 3, 'Travel Insurance to Australia Platinum', 125000, 'Akan terbang ke Australia? Dapatkan asuransi perjalanan ke Australia online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(7, 1, 1, 'Travel Insurance to Canada Silver', 60000, 'Akan terbang ke Kanada? Dapatkan asuransi perjalanan ke Kanada online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(8, 1, 2, 'Travel Insurance to Canada Gold', 115000, 'Akan terbang ke Kanada? Dapatkan asuransi perjalanan ke Kanada online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(9, 1, 3, 'Travel Insurance to Canada Platinum', 125000, 'Akan terbang ke Kanada? Dapatkan asuransi perjalanan ke Kanada online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(10, 1, 1, 'Travel Insurance to China Silver', 60000, 'Akan terbang ke Tiongkok? Dapatkan asuransi perjalanan ke China online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(11, 1, 2, 'Travel Insurance to China Gold', 115000, 'Akan terbang ke Tiongkok? Dapatkan asuransi perjalanan ke China online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(12, 1, 3, 'Travel Insurance to China Platinum', 125000, 'Akan terbang ke Tiongkok? Dapatkan asuransi perjalanan ke China online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(13, 1, 4, 'Travel Insurance to France Schengen Visa Basic', 51500, 'Akan terbang ke Prancis? Dapatkan asuransi perjalanan ke Prancis online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(14, 1, 3, 'Travel Insurance to France Platinum', 125000, 'Akan terbang ke Prancis? Dapatkan asuransi perjalanan ke Prancis online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(15, 1, 4, 'Travel Insurance to Germany Schengen Visa Basic', 51500, 'Akan terbang ke Jerman? Dapatkan asuransi perjalanan ke Jerman online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(16, 1, 3, 'Travel Insurance to Germany Platinum', 125000, 'Akan terbang ke Jerman? Dapatkan asuransi perjalanan ke Jerman online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(17, 1, 1, 'Travel Insurance to Japan Silver', 60000, 'Akan terbang ke Jepang? Dapatkan asuransi perjalanan ke Jepang online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(18, 1, 2, 'Travel Insurance to Japan Gold', 115000, 'Akan terbang ke Jepang? Dapatkan asuransi perjalanan ke Jepang online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(19, 1, 3, 'Travel Insurance to Japan Platinum', 125000, 'Akan terbang ke Jepang? Dapatkan asuransi perjalanan ke Jepang online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(20, 1, 1, 'Travel Insurance to Malaysia Silver', 60000, 'Akan terbang ke Malaysia? Dapatkan asuransi perjalanan ke Malaysia online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(21, 1, 2, 'Travel Insurance to Malaysia Gold', 115000, 'Akan terbang ke Malaysia? Dapatkan asuransi perjalanan ke Malaysia online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(22, 1, 3, 'Travel Insurance to Malaysia Platinum', 125000, 'Akan terbang ke Malaysia? Dapatkan asuransi perjalanan ke Malaysia online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(23, 1, 1, 'Travel Insurance to Mexico Silver', 60000, 'Akan terbang ke Meksiko? Dapatkan asuransi perjalanan ke Meksikoonline. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(24, 1, 2, 'Travel Insurance to Mexico Gold', 115000, 'Akan terbang ke Meksiko? Dapatkan asuransi perjalanan ke Meksikoonline. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(25, 1, 3, 'Travel Insurance to Mexico Platinum', 125000, 'Akan terbang ke Meksiko? Dapatkan asuransi perjalanan ke Meksikoonline. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(26, 1, 4, 'Travel Insurance to Netherlands Schengen Visa Basic', 51500, 'Akan terbang ke Belanda? Dapatkan asuransi perjalanan ke Belanda online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(27, 1, 3, 'Travel Insurance to Netherlands Platinum', 125000, 'Akan terbang ke Belanda? Dapatkan asuransi perjalanan ke Belanda online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(28, 1, 4, 'Travel Insurance to Poland Schengen Visa Basic', 51500, 'Akan terbang ke Polandia? Dapatkan asuransi perjalanan ke Polandia online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(29, 1, 3, 'Travel Insurance to Poland Platinum', 125000, 'Akan terbang ke Polandia? Dapatkan asuransi perjalanan ke Polandia online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(30, 1, 1, 'Travel Insurance to Rusia Silver', 60000, 'Akan terbang ke Rusia? Dapatkan asuransi perjalanan ke Rusia online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(31, 1, 2, 'Travel Insurance to Rusia Gold', 115000, 'Akan terbang ke Rusia? Dapatkan asuransi perjalanan ke Rusia online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(32, 1, 3, 'Travel Insurance to Rusia Platinum', 125000, 'Akan terbang ke Rusia? Dapatkan asuransi perjalanan ke Rusia online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(33, 1, 1, 'Travel Insurance to Selandia Baru Silver', 60000, 'Akan terbang ke Selandia Baru? Dapatkan asuransi perjalanan ke Selandia Baru online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(34, 1, 2, 'Travel Insurance to Selandia Baru Gold', 115000, 'Akan terbang ke Selandia Baru? Dapatkan asuransi perjalanan ke Selandia Baru online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(35, 1, 3, 'Travel Insurance to Selandia Baru Platinum', 125000, 'Akan terbang ke Selandia Baru? Dapatkan asuransi perjalanan ke Selandia Baru online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(36, 1, 1, 'Travel Insurance to South Korea Silver', 60000, 'Akan terbang ke Korea Selatan? Dapatkan asuransi perjalanan ke Korea Selatan online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(37, 1, 2, 'Travel Insurance to South Korea Gold', 115000, 'Akan terbang ke Korea Selatan? Dapatkan asuransi perjalanan ke Korea Selatan online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(38, 1, 3, 'Travel Insurance to South Korea Platinum', 125000, 'Akan terbang ke Korea Selatan? Dapatkan asuransi perjalanan ke Korea Selatan online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(39, 1, 4, 'Travel Insurance to Spain Schengen Visa Basic', 51500, 'Akan terbang ke Spanyol? Dapatkan asuransi perjalanan ke Spanyol online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(40, 1, 3, 'Travel Insurance to Spain Platinum', 125000, 'Akan terbang ke Spanyol? Dapatkan asuransi perjalanan ke Spanyol online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(41, 1, 1, 'Travel Insurance to Thailand Silver', 60000, 'Akan terbang ke Thailand? Dapatkan asuransi perjalanan ke Thailandonline. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(42, 1, 2, 'Travel Insurance to Thailand Gold', 115000, 'Akan terbang ke Thailand? Dapatkan asuransi perjalanan ke Thailandonline. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(43, 1, 3, 'Travel Insurance to Thailand Platinum', 125000, 'Akan terbang ke Thailand? Dapatkan asuransi perjalanan ke Thailandonline. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(44, 1, 1, 'Travel Insurance to Turkey Silver', 60000, 'Akan terbang ke Turki? Dapatkan asuransi perjalanan ke Turki online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(45, 1, 2, 'Travel Insurance to Turkey Gold', 115000, 'Akan terbang ke Turki? Dapatkan asuransi perjalanan ke Turki online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(46, 1, 3, 'Travel Insurance to Turkey Platinum', 125000, 'Akan terbang ke Turki? Dapatkan asuransi perjalanan ke Turki online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(47, 1, 1, 'Travel Insurance to United Kingdom Silver', 60000, 'Akan terbang ke Britania Raya (UK)? Dapatkan asuransi perjalanan ke Britania Raya (UK) online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(48, 1, 2, 'Travel Insurance to United Kingdom Gold', 115000, 'Akan terbang ke Britania Raya (UK)? Dapatkan asuransi perjalanan ke Britania Raya (UK) online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(49, 1, 3, 'Travel Insurance to United Kingdom Platinum', 125000, 'Akan terbang ke Britania Raya (UK)? Dapatkan asuransi perjalanan ke Britania Raya (UK) online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(50, 1, 1, 'Travel Insurance to Vietnam Silver', 60000, 'Akan terbang ke Vietnam? Dapatkan asuransi perjalanan ke Vietnam online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.');
-INSERT INTO `tipe_asuransi` (`id_tipe_asuransi`, `id_kategori`, `status_tipe`, `nama_tipe`, `premi_asuransi`, `keterangan`, `syarat_umum`) VALUES
-(51, 1, 2, 'Travel Insurance to Vietnam Gold', 115000, 'Akan terbang ke Vietnam? Dapatkan asuransi perjalanan ke Vietnam online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(52, 1, 3, 'Travel Insurance to Vietnam Platinum', 125000, 'Akan terbang ke Vietnam? Dapatkan asuransi perjalanan ke Vietnam online. Meringankan ketidaknyamanan perjalanan anda dengan kompensasi yang tepat.', 'Asuransi tidak dapat di-refund. Pemegang polis harus merupakan WANI atau WNA dengan izin tinggal di Indonesia (KITAS atau KITAP). Asuransi hanya berlaku untuk perjalanan dari atau ke Indonesia. Saat membeli asuransi ini, anda harus dalam keadaan sehat untuk bepergian dan tidak mengetahui adanya keadaan yang dapat mengganggu perjalanan anda. Kami berhak menarik kompensasi yang sudah dibayarkan jika ditemukan adanya kecurangan atau manipulasi data dalam proses klaim. Kecuali untuk pembatalan perjalanan, perlindungan dimulai pada tanggal mulai hingga berakhirnya polis. Untuk penerbangan sekali jalan, perlindungan berakhir saat anda mendarat di bandara tujuan. Kami hanya akan menggantikan biaya yang tidak dapat di-refund, hingga nilai perlindungan maksimal.'),
-(53, 2, 0, 'Bebas Rencana', NULL, 'We never know what the future holds. All we know is that we want to make sure our loved ones get to enjoy the best the future can bring. So many ways to show how much you cherish them. One way to do so is by providing insurance protection.\r\n\r\nWith our Life Insurance offers, you can choose protection that works best for your life plan while also enjoying the assurance of a thorough life protection. Because nothing speaks love louder than protecting the future of those dear to you.', 'Indonesian citizens.\r\nFor Bebas Rencana, policyholders are between 18 - 55 years old and the Insured are between 18 - 55 years old (last birthday).'),
-(54, 2, 0, 'Bebas Aksi + Reimbursement of Medical Expenses Due to Accident', NULL, 'We never know what the future holds. All we know is that we want to make sure our loved ones get to enjoy the best the future can bring. So many ways to show how much you cherish them. One way to do so is by providing insurance protection.\r\n\r\nWith our Life Insurance offers, you can choose protection that works best for your life plan while also enjoying the assurance of a thorough life protection. Because nothing speaks love louder than protecting the future of those dear to you.', 'Indonesian citizens.\r\nFor Bebas Aksi, policyholders are between 18 – 65 years old and the Insured are between 18 – 65 years old (last birthday).'),
-(55, 2, 0, 'Bebas Rencana + Bebas Aksi + Reimbursement of Medical Expenses Due to Accident', NULL, 'We never know what the future holds. All we know is that we want to make sure our loved ones get to enjoy the best the future can bring. So many ways to show how much you cherish them. One way to do so is by providing insurance protection.\r\n\r\nWith our Life Insurance offers, you can choose protection that works best for your life plan while also enjoying the assurance of a thorough life protection. Because nothing speaks love louder than protecting the future of those dear to you.', 'Indonesian citizens.\r\nFor Bebas Rencana, policyholders are between 18 – 55 years old and the Insured are between 18 – 55 years old (last birthday).\r\nFor Bebas Aksi, policyholders are between 18 – 65 years old and the Insured are between 18 – 65 years old (last birthday).'),
-(56, 2, 0, 'Bebas Rencana + Bebas Aksi + Reimbursement of Medical Expenses Due to Accident + Total Permanent Dis', NULL, 'We never know what the future holds. All we know is that we want to make sure our loved ones get to enjoy the best the future can bring. So many ways to show how much you cherish them. One way to do so is by providing insurance protection.\r\n\r\nWith our Life Insurance offers, you can choose protection that works best for your life plan while also enjoying the assurance of a thorough life protection. Because nothing speaks love louder than protecting the future of those dear to you.', 'Indonesian citizens.\r\nFor Bebas Rencana, policyholders are between 18 – 55 years old and the Insured are between 18 – 55 years old (last birthday).\r\nFor Bebas Aksi, policyholders are between 18 – 65 years old and the Insured are between 18 – 65 years old (last birthday).'),
-(57, 3, 0, 'Zurich Comprehensive', NULL, 'This is the best time for you to get covered by the best car insurance partner in Indonesia. We know car insurance has long class requirements aspects that you need to acknowledge before making the decision. Even though your car already registered to one of the car insurance companies, let&#39s try to answer these few questions. What exactly does it cover? How much does it cost? Why does it cost so much? How do you file a claim? And you will not be running out of questions about insurance.\r\n\r\nBut at least you need to have basic knowledge related to car insurance. You need this in the future. You even can use it to choose best insurance for you car when you needed. Learn more about insurance to save your time and money. Let Traveloka Insurance (Insurance Product from Traveloka) becomes your best insurance company partner.', 'Before purchasing car insurance, however, please be informed of the following insurance rating factors so that you can get a higher chance of getting approved. \r\n\r\nCar age: Max. 10 years old for All-Risk/Comprehensive plan, and max. 15 years for TLO or Total Loss Only. \r\nCar model: The model of your car affects the amount of premium you need to pay. You should read about your insurance product in more detail on the insurance company’s website, ask an insurance agent directly, or conduct a premium simulation available on your insurance company’s website. \r\nDriving record: The best and orderly driver will get the best price. Your insurance company may collect driving records from various third-party institutions.\r\nClaim record: Is this a second-year insurance application or a second, third, etc. insurance policy extension? Generally, insurance companies and their networks keep a complete historical record of all your claims and incidents. These claim records help insurance companies select deserving clients.\r\nYour location: Indonesia has extensive and varied terrains. From barren lands to flood-prone locations, locations near volcanoes, and tsunami-prone locations, all areas are recorded in the insurance company’s database. With this said, your location will affect the output of your insurance application process.\r\nCredit score: While not all insurance companies consider this factor in your insurance application scheme, you nonetheless should pay attention to your credit score to improve your chances of getting an insurance product and services in the future.'),
-(58, 3, 0, 'Zurich Total Loss Only Plan', NULL, 'This is the best time for you to get covered by the best car insurance partner in Indonesia. We know car insurance has long class requirements aspects that you need to acknowledge before making the decision. Even though your car already registered to one of the car insurance companies, let&#39s try to answer these few questions. What exactly does it cover? How much does it cost? Why does it cost so much? How do you file a claim? And you will not be running out of questions about insurance.\r\n\r\nBut at least you need to have basic knowledge related to car insurance. You need this in the future. You even can use it to choose best insurance for you car when you needed. Learn more about insurance to save your time and money. Let Traveloka Insurance (Insurance Product from Traveloka) becomes your best insurance company partner.', 'Before purchasing car insurance, however, please be informed of the following insurance rating factors so that you can get a higher chance of getting approved. \r\n\r\nCar age: Max. 10 years old for All-Risk/Comprehensive plan, and max. 15 years for TLO or Total Loss Only. \r\nCar model: The model of your car affects the amount of premium you need to pay. You should read about your insurance product in more detail on the insurance company’s website, ask an insurance agent directly, or conduct a premium simulation available on your insurance company’s website. \r\nDriving record: The best and orderly driver will get the best price. Your insurance company may collect driving records from various third-party institutions.\r\nClaim record: Is this a second-year insurance application or a second, third, etc. insurance policy extension? Generally, insurance companies and their networks keep a complete historical record of all your claims and incidents. These claim records help insurance companies select deserving clients.\r\nYour location: Indonesia has extensive and varied terrains. From barren lands to flood-prone locations, locations near volcanoes, and tsunami-prone locations, all areas are recorded in the insurance company’s database. With this said, your location will affect the output of your insurance application process.\r\nCredit score: While not all insurance companies consider this factor in your insurance application scheme, you nonetheless should pay attention to your credit score to improve your chances of getting an insurance product and services in the future.'),
-(59, 3, 0, 'Sinarmas Comprehensive', NULL, 'This is the best time for you to get covered by the best car insurance partner in Indonesia. We know car insurance has long class requirements aspects that you need to acknowledge before making the decision. Even though your car already registered to one of the car insurance companies, let&#39s try to answer these few questions. What exactly does it cover? How much does it cost? Why does it cost so much? How do you file a claim? And you will not be running out of questions about insurance.\r\n\r\nBut at least you need to have basic knowledge related to car insurance. You need this in the future. You even can use it to choose best insurance for you car when you needed. Learn more about insurance to save your time and money. Let Traveloka Insurance (Insurance Product from Traveloka) becomes your best insurance company partner.', 'Before purchasing car insurance, however, please be informed of the following insurance rating factors so that you can get a higher chance of getting approved. \r\n\r\nCar age: Max. 10 years old for All-Risk/Comprehensive plan, and max. 15 years for TLO or Total Loss Only. \r\nCar model: The model of your car affects the amount of premium you need to pay. You should read about your insurance product in more detail on the insurance company’s website, ask an insurance agent directly, or conduct a premium simulation available on your insurance company’s website. \r\nDriving record: The best and orderly driver will get the best price. Your insurance company may collect driving records from various third-party institutions.\r\nClaim record: Is this a second-year insurance application or a second, third, etc. insurance policy extension? Generally, insurance companies and their networks keep a complete historical record of all your claims and incidents. These claim records help insurance companies select deserving clients.\r\nYour location: Indonesia has extensive and varied terrains. From barren lands to flood-prone locations, locations near volcanoes, and tsunami-prone locations, all areas are recorded in the insurance company’s database. With this said, your location will affect the output of your insurance application process.\r\nCredit score: While not all insurance companies consider this factor in your insurance application scheme, you nonetheless should pay attention to your credit score to improve your chances of getting an insurance product and services in the future.'),
-(60, 3, 0, 'Sinarmas Total Loss Only Plan', NULL, 'This is the best time for you to get covered by the best car insurance partner in Indonesia. We know car insurance has long class requirements aspects that you need to acknowledge before making the decision. Even though your car already registered to one of the car insurance companies, let&#39s try to answer these few questions. What exactly does it cover? How much does it cost? Why does it cost so much? How do you file a claim? And you will not be running out of questions about insurance.\r\n\r\nBut at least you need to have basic knowledge related to car insurance. You need this in the future. You even can use it to choose best insurance for you car when you needed. Learn more about insurance to save your time and money. Let Traveloka Insurance (Insurance Product from Traveloka) becomes your best insurance company partner.', 'Before purchasing car insurance, however, please be informed of the following insurance rating factors so that you can get a higher chance of getting approved. \r\n\r\nCar age: Max. 10 years old for All-Risk/Comprehensive plan, and max. 15 years for TLO or Total Loss Only. \r\nCar model: The model of your car affects the amount of premium you need to pay. You should read about your insurance product in more detail on the insurance company’s website, ask an insurance agent directly, or conduct a premium simulation available on your insurance company’s website. \r\nDriving record: The best and orderly driver will get the best price. Your insurance company may collect driving records from various third-party institutions.\r\nClaim record: Is this a second-year insurance application or a second, third, etc. insurance policy extension? Generally, insurance companies and their networks keep a complete historical record of all your claims and incidents. These claim records help insurance companies select deserving clients.\r\nYour location: Indonesia has extensive and varied terrains. From barren lands to flood-prone locations, locations near volcanoes, and tsunami-prone locations, all areas are recorded in the insurance company’s database. With this said, your location will affect the output of your insurance application process.\r\nCredit score: While not all insurance companies consider this factor in your insurance application scheme, you nonetheless should pay attention to your credit score to improve your chances of getting an insurance product and services in the future.'),
-(61, 3, 0, 'Tugu Comprehensive', NULL, 'This is the best time for you to get covered by the best car insurance partner in Indonesia. We know car insurance has long class requirements aspects that you need to acknowledge before making the decision. Even though your car already registered to one of the car insurance companies, let&#39s try to answer these few questions. What exactly does it cover? How much does it cost? Why does it cost so much? How do you file a claim? And you will not be running out of questions about insurance.\r\n\r\nBut at least you need to have basic knowledge related to car insurance. You need this in the future. You even can use it to choose best insurance for you car when you needed. Learn more about insurance to save your time and money. Let Traveloka Insurance (Insurance Product from Traveloka) becomes your best insurance company partner.', 'Before purchasing car insurance, however, please be informed of the following insurance rating factors so that you can get a higher chance of getting approved. \r\n\r\nCar age: Max. 10 years old for All-Risk/Comprehensive plan, and max. 15 years for TLO or Total Loss Only. \r\nCar model: The model of your car affects the amount of premium you need to pay. You should read about your insurance product in more detail on the insurance company’s website, ask an insurance agent directly, or conduct a premium simulation available on your insurance company’s website. \r\nDriving record: The best and orderly driver will get the best price. Your insurance company may collect driving records from various third-party institutions.\r\nClaim record: Is this a second-year insurance application or a second, third, etc. insurance policy extension? Generally, insurance companies and their networks keep a complete historical record of all your claims and incidents. These claim records help insurance companies select deserving clients.\r\nYour location: Indonesia has extensive and varied terrains. From barren lands to flood-prone locations, locations near volcanoes, and tsunami-prone locations, all areas are recorded in the insurance company’s database. With this said, your location will affect the output of your insurance application process.\r\nCredit score: While not all insurance companies consider this factor in your insurance application scheme, you nonetheless should pay attention to your credit score to improve your chances of getting an insurance product and services in the future.'),
-(62, 3, 0, 'Tugu Total Loss Only Plan', NULL, 'This is the best time for you to get covered by the best car insurance partner in Indonesia. We know car insurance has long class requirements aspects that you need to acknowledge before making the decision. Even though your car already registered to one of the car insurance companies, let&#39s try to answer these few questions. What exactly does it cover? How much does it cost? Why does it cost so much? How do you file a claim? And you will not be running out of questions about insurance.\r\n\r\nBut at least you need to have basic knowledge related to car insurance. You need this in the future. You even can use it to choose best insurance for you car when you needed. Learn more about insurance to save your time and money. Let Traveloka Insurance (Insurance Product from Traveloka) becomes your best insurance company partner.', 'Before purchasing car insurance, however, please be informed of the following insurance rating factors so that you can get a higher chance of getting approved. \r\n\r\nCar age: Max. 10 years old for All-Risk/Comprehensive plan, and max. 15 years for TLO or Total Loss Only. \r\nCar model: The model of your car affects the amount of premium you need to pay. You should read about your insurance product in more detail on the insurance company’s website, ask an insurance agent directly, or conduct a premium simulation available on your insurance company’s website. \r\nDriving record: The best and orderly driver will get the best price. Your insurance company may collect driving records from various third-party institutions.\r\nClaim record: Is this a second-year insurance application or a second, third, etc. insurance policy extension? Generally, insurance companies and their networks keep a complete historical record of all your claims and incidents. These claim records help insurance companies select deserving clients.\r\nYour location: Indonesia has extensive and varied terrains. From barren lands to flood-prone locations, locations near volcanoes, and tsunami-prone locations, all areas are recorded in the insurance company’s database. With this said, your location will affect the output of your insurance application process.\r\nCredit score: While not all insurance companies consider this factor in your insurance application scheme, you nonetheless should pay attention to your credit score to improve your chances of getting an insurance product and services in the future.'),
-(63, 3, 0, 'MAG Comprehensive', NULL, 'This is the best time for you to get covered by the best car insurance partner in Indonesia. We know car insurance has long class requirements aspects that you need to acknowledge before making the decision. Even though your car already registered to one of the car insurance companies, let&#39s try to answer these few questions. What exactly does it cover? How much does it cost? Why does it cost so much? How do you file a claim? And you will not be running out of questions about insurance.\r\n\r\nBut at least you need to have basic knowledge related to car insurance. You need this in the future. You even can use it to choose best insurance for you car when you needed. Learn more about insurance to save your time and money. Let Traveloka Insurance (Insurance Product from Traveloka) becomes your best insurance company partner.', 'Before purchasing car insurance, however, please be informed of the following insurance rating factors so that you can get a higher chance of getting approved. \r\n\r\nCar age: Max. 10 years old for All-Risk/Comprehensive plan, and max. 15 years for TLO or Total Loss Only. \r\nCar model: The model of your car affects the amount of premium you need to pay. You should read about your insurance product in more detail on the insurance company’s website, ask an insurance agent directly, or conduct a premium simulation available on your insurance company’s website. \r\nDriving record: The best and orderly driver will get the best price. Your insurance company may collect driving records from various third-party institutions.\r\nClaim record: Is this a second-year insurance application or a second, third, etc. insurance policy extension? Generally, insurance companies and their networks keep a complete historical record of all your claims and incidents. These claim records help insurance companies select deserving clients.\r\nYour location: Indonesia has extensive and varied terrains. From barren lands to flood-prone locations, locations near volcanoes, and tsunami-prone locations, all areas are recorded in the insurance company’s database. With this said, your location will affect the output of your insurance application process.\r\nCredit score: While not all insurance companies consider this factor in your insurance application scheme, you nonetheless should pay attention to your credit score to improve your chances of getting an insurance product and services in the future.'),
-(64, 3, 0, 'MAG Total Loss Only Plan', NULL, 'This is the best time for you to get covered by the best car insurance partner in Indonesia. We know car insurance has long class requirements aspects that you need to acknowledge before making the decision. Even though your car already registered to one of the car insurance companies, let&#39s try to answer these few questions. What exactly does it cover? How much does it cost? Why does it cost so much? How do you file a claim? And you will not be running out of questions about insurance.\r\n\r\nBut at least you need to have basic knowledge related to car insurance. You need this in the future. You even can use it to choose best insurance for you car when you needed. Learn more about insurance to save your time and money. Let Traveloka Insurance (Insurance Product from Traveloka) becomes your best insurance company partner.', 'Before purchasing car insurance, however, please be informed of the following insurance rating factors so that you can get a higher chance of getting approved. \r\n\r\nCar age: Max. 10 years old for All-Risk/Comprehensive plan, and max. 15 years for TLO or Total Loss Only. \r\nCar model: The model of your car affects the amount of premium you need to pay. You should read about your insurance product in more detail on the insurance company’s website, ask an insurance agent directly, or conduct a premium simulation available on your insurance company’s website. \r\nDriving record: The best and orderly driver will get the best price. Your insurance company may collect driving records from various third-party institutions.\r\nClaim record: Is this a second-year insurance application or a second, third, etc. insurance policy extension? Generally, insurance companies and their networks keep a complete historical record of all your claims and incidents. These claim records help insurance companies select deserving clients.\r\nYour location: Indonesia has extensive and varied terrains. From barren lands to flood-prone locations, locations near volcanoes, and tsunami-prone locations, all areas are recorded in the insurance company’s database. With this said, your location will affect the output of your insurance application process.\r\nCredit score: While not all insurance companies consider this factor in your insurance application scheme, you nonetheless should pay attention to your credit score to improve your chances of getting an insurance product and services in the future.'),
-(65, 4, 0, 'Motor Insurance Total Loss Only Plan', NULL, 'Protecting your motorcycle has never been this easy. Now with just a few taps, you can get insured at an affordable price and be back on the read without worries.', 'Motorcycle age max. 10 years old'),
-(66, 5, 0, 'Home Insurance Single-Trip Silver', NULL, 'Protecting your home has never been this easy. Now with just a few taps, you can get insured at an affordable price and without worries.', NULL),
-(67, 5, 0, 'Home Insurance Single-Trip Gold', NULL, 'Protecting your home has never been this easy. Now with just a few taps, you can get insured at an affordable price and without worries.', NULL),
-(68, 5, 0, 'Home Insurance Single-Trip Platinum', NULL, 'Protecting your home has never been this easy. Now with just a few taps, you can get insured at an affordable price and without worries.', NULL),
-(69, 5, 0, 'Home Insurance Annual Gold', NULL, 'Protecting your home has never been this easy. Now with just a few taps, you can get insured at an affordable price and without worries.', NULL),
-(70, 5, 0, 'Home Insurance Annual Platinum', NULL, 'Protecting your home has never been this easy. Now with just a few taps, you can get insured at an affordable price and without worries.', NULL),
-(71, 6, 0, 'Bebas Handal A', NULL, 'We understand that your health is precious, hence we offer health insurance with extensive coverage and various benefits to protect you and your loved ones. \r\n\r\nSimplify the claim process by using cashless method with Bebas Handal by FWD. Get your hospitalization fully covered* up to Rp 100.000.000 per year!', 'You can be insured with BEBAS HANDAL - FWD if you are between the ages of 30 days and 55 years old'),
-(72, 6, 0, 'Bebas Handal B', NULL, 'We understand that your health is precious, hence we offer health insurance with extensive coverage and various benefits to protect you and your loved ones. \r\n\r\nSimplify the claim process by using cashless method with Bebas Handal by FWD. Get your hospitalization fully covered* up to Rp 100.000.000 per year!', 'You can be insured with BEBAS HANDAL - FWD if you are between the ages of 30 days and 55 years old'),
-(73, 6, 0, 'Bebas Handal C', NULL, 'We understand that your health is precious, hence we offer health insurance with extensive coverage and various benefits to protect you and your loved ones. \r\n\r\nSimplify the claim process by using cashless method with Bebas Handal by FWD. Get your hospitalization fully covered* up to Rp 100.000.000 per year!', 'You can be insured with BEBAS HANDAL - FWD if you are between the ages of 30 days and 55 years old'),
-(74, 6, 0, 'Bebas Handal D', NULL, 'We understand that your health is precious, hence we offer health insurance with extensive coverage and various benefits to protect you and your loved ones. \r\n\r\nSimplify the claim process by using cashless method with Bebas Handal by FWD. Get your hospitalization fully covered* up to Rp 100.000.000 per year!', 'You can be insured with BEBAS HANDAL - FWD if you are between the ages of 30 days and 55 years old'),
-(75, 6, 0, 'Hospital Cash Plan Basic', NULL, 'We understand that your health is precious, hence we offer health insurance with extensive coverage and various benefits to protect you and your loved ones. \r\n\r\nGet Daily Hospital Benefit* with Hospital Cash Plan up to Rp300.000/day and Rp128.000.000/year with double claim facility from Astra Life.', 'You can be insured with Hospital Cash Plan - Astra Life if you are between the ages of 18 years old and 59 years old'),
-(76, 6, 0, 'Hospital Cash Plan Surgery', NULL, 'We understand that your health is precious, hence we offer health insurance with extensive coverage and various benefits to protect you and your loved ones. \r\n\r\nGet Daily Hospital Benefit* with Hospital Cash Plan up to Rp300.000/day and Rp128.000.000/year with double claim facility from Astra Life.', 'You can be insured with Hospital Cash Plan - Astra Life if you are between the ages of 18 years old and 59 years old'),
-(77, 6, 0, 'Hospital Cash Plan Critical Illness', NULL, 'We understand that your health is precious, hence we offer health insurance with extensive coverage and various benefits to protect you and your loved ones. \r\n\r\nGet Daily Hospital Benefit* with Hospital Cash Plan up to Rp300.000/day and Rp128.000.000/year with double claim facility from Astra Life.', 'You can be insured with Hospital Cash Plan - Astra Life if you are between the ages of 18 years old and 59 years old'),
-(78, 6, 0, 'Hospital Cash Plan Comprehensive', NULL, 'We understand that your health is precious, hence we offer health insurance with extensive coverage and various benefits to protect you and your loved ones. \r\n\r\nGet Daily Hospital Benefit* with Hospital Cash Plan up to Rp300.000/day and Rp128.000.000/year with double claim facility from Astra Life.', 'You can be insured with Hospital Cash Plan - Astra Life if you are between the ages of 18 years old and 59 years old'),
-(79, 6, 0, 'Cancer Basic Protection', NULL, 'We understand that your health is precious, hence we offer health insurance with extensive coverage and various benefits to protect you and your loved ones. \r\n\r\nHave protection for you and your family against cancer risk with FWD Cancer Protection with a total sum insured up toRp 150.000.000', 'You can be insured with FWD Cancer Protection Insurance if you are between the ages of 18 years old and 64 years old'),
-(80, 6, 0, 'Cancer Standard Protection', NULL, 'We understand that your health is precious, hence we offer health insurance with extensive coverage and various benefits to protect you and your loved ones. \r\n\r\nHave protection for you and your family against cancer risk with FWD Cancer Protection with a total sum insured up toRp 150.000.000', 'You can be insured with FWD Cancer Protection Insurance if you are between the ages of 18 years old and 64 years old'),
-(81, 6, 0, 'Cancer Optimal Protection', NULL, 'We understand that your health is precious, hence we offer health insurance with extensive coverage and various benefits to protect you and your loved ones. \r\n\r\nHave protection for you and your family against cancer risk with FWD Cancer Protection with a total sum insured up toRp 150.000.000', 'You can be insured with FWD Cancer Protection Insurance if you are between the ages of 18 years old and 64 years old');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `coverage_asuransi`
---
-ALTER TABLE `coverage_asuransi`
-  ADD PRIMARY KEY (`id_coverage`);
-
---
--- Indexes for table `kategori_asuransi`
---
-ALTER TABLE `kategori_asuransi`
-  ADD PRIMARY KEY (`id_kategori`);
-
---
--- Indexes for table `klaim_asuransi`
---
-ALTER TABLE `klaim_asuransi`
-  ADD PRIMARY KEY (`id_klaim`);
-
---
--- Indexes for table `pembayaran_asuransi`
---
-ALTER TABLE `pembayaran_asuransi`
-  ADD PRIMARY KEY (`id_pembayaran`);
-
---
--- Indexes for table `pembelian_asuransi`
---
-ALTER TABLE `pembelian_asuransi`
-  ADD PRIMARY KEY (`id_pembelian`);
-
---
--- Indexes for table `tipe_asuransi`
---
-ALTER TABLE `tipe_asuransi`
-  ADD PRIMARY KEY (`id_tipe_asuransi`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `coverage_asuransi`
---
-ALTER TABLE `coverage_asuransi`
-  MODIFY `id_coverage` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
---
--- AUTO_INCREMENT for table `kategori_asuransi`
---
-ALTER TABLE `kategori_asuransi`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `klaim_asuransi`
---
-ALTER TABLE `klaim_asuransi`
-  MODIFY `id_klaim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `pembayaran_asuransi`
---
-ALTER TABLE `pembayaran_asuransi`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `pembelian_asuransi`
---
-ALTER TABLE `pembelian_asuransi`
-  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `tipe_asuransi`
---
-ALTER TABLE `tipe_asuransi`
-  MODIFY `id_tipe_asuransi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+INSERT INTO `travel_insurance` (`id_travel`, `wilayah`, `negara`, `1-4`, `5-6`, `7-8`, `9-10`, `11-15`, `16-20`, `21-25`, `26-30`, `366`) VALUES
+(1, 1, 'Indonesia', 47500, 55000, 75000, 90000, 125000, 175000, 215000, 255000, 1250000),
+(2, 2, 'Afganistan', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(3, 2, 'Albania', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(4, 2, 'Algeria', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(5, 2, 'American Samoa', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(6, 2, 'Andorra', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(7, 2, 'Angola', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(8, 2, 'Anguilla', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(9, 2, 'Antarctica', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(10, 2, 'Antigua and Barbuda', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(11, 2, 'Argentina', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(12, 2, 'Armenia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(13, 2, 'Aruba', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(14, 2, 'Australia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(15, 2, 'Austria', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(16, 2, 'Azerbaijan', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(17, 2, 'Bahamas', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(18, 2, 'Bahrain', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(19, 2, 'Bangladesh', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(20, 2, 'Barbadoos', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(21, 2, 'Belarus', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(22, 2, 'Belgium', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(23, 2, 'Belize', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(24, 2, 'Benin', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(25, 2, 'Bermuda', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(26, 2, 'Bhutan', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(27, 2, 'Bolivia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(28, 2, 'Bosnia and Herzegovina', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(29, 2, 'Botswana', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(30, 2, 'Bouvet Island', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(31, 2, 'Brazil', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(32, 2, 'British Indian Ocean Territory', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(33, 2, 'British Virgin Island', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(34, 2, 'Brunei', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(35, 2, 'Bulgaria', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(36, 2, 'Burkina Faso', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(37, 2, 'Burundi', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(38, 2, 'Cambodia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(39, 2, 'Cameroon', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(40, 2, 'Canada', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(41, 2, 'Cape Verde', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(42, 2, 'Central African Republic', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(43, 2, 'Chad', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(44, 2, 'Chile', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(45, 2, 'China', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(46, 2, 'Christmas Island', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(47, 2, 'Colombia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(48, 2, 'Comoros', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(49, 2, 'Congo Democratic Republic', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(50, 2, 'Congo Republic', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(51, 2, 'Cook Islands', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(52, 2, 'Costa Rica', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(53, 2, 'Croatia', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(54, 2, 'Cyprus', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(55, 2, 'Czech Republic', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(56, 2, 'Denmark', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(57, 2, 'Djibouti', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(58, 2, 'Dominica', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(59, 2, 'Dominican Republic', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(60, 2, 'Ecuador', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(61, 2, 'Egypt', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(62, 2, 'El Salvador', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(63, 2, 'Equatorial Guinea', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(64, 2, 'Eritrea', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(65, 2, 'Estonia', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(66, 2, 'Ethiopia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(67, 2, 'Falkland Islands', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(68, 2, 'Fiji', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(69, 2, 'Finland', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(70, 2, 'France', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(71, 2, 'French Polynesia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(72, 2, 'French Southern Territories', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(73, 2, 'Gabon', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(74, 2, 'Gambia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(75, 2, 'Georgia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(76, 2, 'Germany', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(77, 2, 'Ghana', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(78, 2, 'Gibraltar', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(79, 2, 'Greece', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(80, 2, 'Greenland', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(81, 2, 'Grenada', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(82, 2, 'Guam', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(83, 2, 'Guatemala', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(84, 2, 'Guernsey', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(85, 2, 'Guinea', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(86, 2, 'Guinea-Bissau', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(87, 2, 'Guyana', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(88, 2, 'Haiti', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(89, 2, 'Holy See', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(90, 2, 'Honduras', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(91, 2, 'Hong Kong', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(92, 2, 'Hungary', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(93, 2, 'Iceland', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(94, 2, 'India', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(95, 2, 'Iraq', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(96, 2, 'Ireland', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(97, 2, 'Isle of Man', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(98, 2, 'Israel', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(99, 2, 'Italy', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(100, 2, 'Ivory Coast', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(101, 2, 'Jamaica', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(102, 2, 'Japan', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(103, 2, 'Jersey', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(104, 2, 'Jordan', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(105, 2, 'Kazakhstan', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(106, 2, 'Kenya', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(107, 2, 'Kiribati', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(108, 2, 'Kuwait', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(109, 2, 'Kyrgyzstan', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(110, 2, 'Laos', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(111, 2, 'Latvia', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(112, 2, 'Lebanon', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(113, 2, 'Lesotho', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(114, 2, 'Liberia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(115, 2, 'Libya', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(116, 2, 'Liechtenstein', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(117, 2, 'Lithuania', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(118, 2, 'Luxembourg', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(119, 2, 'Macau', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(120, 2, 'Macedonia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(121, 2, 'Madagascar', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(122, 2, 'Malawi', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(123, 2, 'Malaysia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(124, 2, 'Maldives', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(125, 2, 'Mali', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(126, 2, 'Malta', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(127, 2, 'Marshall Islands', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(128, 2, 'Mauritania', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(129, 2, 'Mauritius', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(130, 2, 'Mexico', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(131, 2, 'Micronesia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(132, 2, 'Moldova', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(133, 2, 'Monaco', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(134, 2, 'Mongolia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(135, 2, 'Montenegro', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(136, 2, 'Morocco', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(137, 2, 'Mozambique', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(138, 2, 'Myanmar', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(139, 2, 'Namibia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(140, 2, 'Nauru', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(141, 2, 'Nepal', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(142, 2, 'Netherlands', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(143, 2, 'Netherlands Antilles', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(144, 2, 'New Zealand', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(145, 2, 'Nicaragua', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(146, 2, 'Niger', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(147, 2, 'Nigeria', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(148, 2, 'Niue', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(149, 2, 'Norfolk Island', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(150, 2, 'Northern Mariana Island', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(151, 2, 'Norway', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(152, 2, 'Oman', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(153, 2, 'Pakistan', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(154, 2, 'Palau', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(155, 2, 'Palestinian Territory', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(156, 2, 'Panama', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(157, 2, 'Papua New Guinea', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(158, 2, 'Paraguay', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(159, 2, 'Peru', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(160, 2, 'Philippines', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(161, 2, 'Pitcairn', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(162, 2, 'Poland', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(163, 2, 'Portugal', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(164, 2, 'Puerto Rico', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(165, 2, 'Qatar', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(166, 2, 'Romania', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(167, 2, 'Russia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(168, 2, 'Rwanda', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(169, 2, 'Saint Bathelemy', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(170, 2, 'Saint Helena Ascension and Tristan da Cunha', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(171, 2, 'Saint Kitts and Nevis', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(172, 2, 'Saint Lucia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(173, 2, 'Saint Martin', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(174, 2, 'Saint Pierre and Miquelon', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(175, 2, 'Saint Vincent and the Grenadines', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(176, 2, 'Samoa', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(177, 2, 'San Marino', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(178, 2, 'Sao Tome and Principe', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(179, 2, 'Saudi Arabia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(180, 2, 'Senegal', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(181, 2, 'Serbia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(182, 2, 'Seychelles', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(183, 2, 'Sierra Leone', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(184, 2, 'Singapore', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(185, 2, 'Slovakia', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(186, 2, 'Slovenia', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(187, 2, 'Solomon Islands', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(188, 2, 'Somalia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(189, 2, 'South Africa', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(190, 2, 'South Korea', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(191, 2, 'Spain', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(192, 2, 'Sri Lanka', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(193, 2, 'Suriname', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(194, 2, 'Svalbard', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(195, 2, 'Swaziland', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(196, 2, 'Sweden', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(197, 2, 'Switzerland', 187500, 360000, 502500, 637500, 712500, 928500, 1062000, 1192500, 1250000),
+(198, 2, 'Taiwan', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(199, 2, 'Tajikistan', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(200, 2, 'Tanzania', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(201, 2, 'Thailand', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(202, 2, 'Togo', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(203, 2, 'Tokelau', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(204, 2, 'Tonga', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(205, 2, 'Trinidad and Tobago', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(206, 2, 'Tunisia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(207, 2, 'Turkey', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(208, 2, 'Turkmenistan', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(209, 2, 'Turks and Caicos Islands', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(210, 2, 'Tuvalu', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(211, 2, 'Uganda', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(212, 2, 'Ukraine', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(213, 2, 'United Arab Emirates', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(214, 2, 'United Kingdom', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(215, 2, 'United States', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(216, 2, 'Uruguay', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(217, 2, 'Uzbekistan', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(218, 2, 'Vanuatu', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(219, 2, 'Venezuela', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(220, 2, 'Vietnam', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(221, 2, 'Virgin Islands', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(222, 2, 'Wallis and Futuna', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(223, 2, 'Yemen', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(224, 2, 'Zambia', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000),
+(225, 2, 'Zimbabwe', 115000, 133500, 185000, 225000, 305000, 425000, 520000, 650000, 1250000);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
