@@ -183,7 +183,7 @@ INSERT INTO `pembelian_asuransi` (`id_pembelian`, `id_user`, `id_booking`, `id_k
 
 DROP TABLE IF EXISTS `travel_insurance`;
 CREATE TABLE IF NOT EXISTS `travel_insurance` (
-  `id_travel` int(11) NOT NULL,
+  `id_travel` int(11) NOT NULL AUTO_INCREMENT,
   `wilayah` int(1) NOT NULL,
   `negara` varchar(50) NOT NULL,
   `1-4` int(11) NOT NULL,
