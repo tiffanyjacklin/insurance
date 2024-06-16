@@ -197,8 +197,8 @@ include "header.php"
             flex-shrink: 0;
         }
         .container4 {
-            width: 80%;
-            max-width: 800px;
+            width: 100%;
+            max-width: 1000px;
             margin: auto;
             padding: 20px;
             background-color: #fff;
@@ -207,35 +207,46 @@ include "header.php"
 
         .dropdown {
             margin-bottom: 10px;
+            position: relative;
         }
         .dropdown-title {
             cursor: pointer;
             background-color: #fff;
             padding: 15px;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #7b7b7b;
             text-align: left;
-            font-weight: bold;
-            font-size: 24px;
+            font-size: 36px;
             margin-bottom: 5px;
+            font-family: 'Times New Roman', Times, serif;
+            position: relative;
         }
         .dropdown-title::after {
             content: '';
-            background-image: url('data:image/svg+xml;charset=utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M17.707 5.293a1 1 0 0 0-1.414 0L10 11.586 3.707 5.293a1 1 0 0 0-1.414 1.414l7 7a1 1 0 0 0 1.414 0l7-7a1 1 0 0 0 0-1.414z"/></svg>');
-            /* background-repeat: no-repeat; */
+            background-image: url('data:image/svg+xml;charset=utf8,<svg fill="black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M17.707 5.293a1 1 0 0 0-1.414 0L10 11.586 3.707 5.293a1 1 0 0 0-1.414 1.414l7 7a1 1 0 0 0 1.414 0l7-7a1 1 0 0 0 0-1.414z"/></svg>');
+            background-repeat: no-repeat;
             background-position: right 10px center;
             background-size: 14px;
             position: absolute;
             top: 50%;
+            transition: transform 0.3s ease;
             transform: translateY(-50%);
             right: 10px;
-            width: 14px; /* Adjust size of arrow icon */
-            height: 14px; /* Adjust size of arrow icon */
+            width: 30px; /* Adjust size of arrow icon */
+            height: 30px; /* Adjust size of arrow icon */
         }
+
         .dropdown-content {
             display: none;
             padding: 10px;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #7b7b7b;
             text-align: left;
+        }
+        .dropdown-content h2 {
+            font-size: 25px;
+            font-weight: bold;
+        }
+        .dropdown-content p{
+            font-size: 20px;
         }
         .arrow {
             font-size: 24px;
@@ -243,6 +254,176 @@ include "header.php"
         }
         .dropdown-title.active .arrow {
             transform: rotate(180deg);
+        }
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+
+        .lead.my-3 {
+            margin: 15px 0;
+        }
+
+        .claim-container {
+            display: flex;
+        }
+
+        .claim-left {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .claim-right {
+            flex: 3;
+            padding-left: 20px;
+        }
+
+        .claim-left img {
+            width: 100%;
+            height: auto;
+        }
+        .faq-item {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .faq-question::after {
+            content: '';
+            background-image: url('data:image/svg+xml;charset=utf8,<svg fill="black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M17.707 5.293a1 1 0 0 0-1.414 0L10 11.586 3.707 5.293a1 1 0 0 0-1.414 1.414l7 7a1 1 0 0 0 1.414 0l7-7a1 1 0 0 0 0-1.414z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 14px;
+            transition: transform 0.3s ease;
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            display: none;
+            margin-top: 5px;
+            color: #555;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .criteria-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .criteria-item {
+            flex: 1 1 45%;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .criteria-item:hover {
+            transform: scale(1.05);
+        }
+
+        .criteria-item h3 {
+            margin-top: 0;
+            font-size: 22px;
+            color: #333;
+        }
+
+        .criteria-item p {
+            margin: 10px 0;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .criteria-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .why-us-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .why-us-item {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .why-us-item:hover {
+            transform: scale(1.05);
+        }
+
+        .why-us-item h3 {
+            margin-top: 0;
+            font-size: 22px;
+            color: #333;
+        }
+
+        .why-us-item p {
+            margin: 10px 0;
+            color: #555;
+            font-size: 16px;
+        }
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .step-item:hover {
+            transform: scale(1.05);
+        }
+
+        .step-item h3 {
+            margin-top: 0;
+            font-size: 22px;
+            color: #333;
+        }
+
+        .step-item p {
+            margin: 10px 0;
+            color: #555;
+            font-size: 16px;
         }
     </style>
 </head>
@@ -277,43 +458,6 @@ include "header.php"
                                     }
                                 }
                                 ?>
-                                <!-- <option value="Nanggroe Aceh Darussalam">Nanggroe Aceh Darussalam</option>
-                                <option value="Sumatra Utara">Sumatra Utara</option>
-                                <option value="Sumatra Selatan">Sumatra Selatan</option>
-                                <option value="Sumatra Barat">Sumatra Barat</option>
-                                <option value="Bengkulu">Bengkulu</option>
-                                <option value="Riau">Riau</option>
-                                <option value="Kepulauan Riau">Kepulauan Riau</option>
-                                <option value="Jambi">Jambi</option>
-                                <option value="Lampung">Lampung</option>
-                                <option value="Bangka Belitung">Bangka Belitung</option>
-                                <option value="Kalimantan Barat">Kalimantan Barat</option>
-                                <option value="Kalimantan Timur">Kalimantan Timur</option>
-                                <option value="Kalimantan Selatan">Kalimantan Selatan</option>
-                                <option value="Kalimantan Tengah">Kalimantan Tengah</option>
-                                <option value="Kalimantan Utara">Kalimantan Utara</option>
-                                <option value="Banten">Banten</option>
-                                <option value="DKI Jakarta">DKI Jakarta</option>
-                                <option value="Jawa Barat">Jawa Barat</option>
-                                <option value="Jawa Tengah">Jawa Tengah</option>
-                                <option value="Daerah Istimewa Yogyakarta">Daerah Istimewa Yogyakarta</option>
-                                <option value="Jawa Timur">Jawa Timur</option>
-                                <option value="Bali">Bali</option>
-                                <option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
-                                <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
-                                <option value="Gorontalo">Gorontalo</option>
-                                <option value="Sulawesi Barat">Sulawesi Barat</option>
-                                <option value="Sulawesi Tengah">Sulawesi Tengah</option>
-                                <option value="Sulawesi Utara">Sulawesi Utara</option>
-                                <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
-                                <option value="Sulawesi Selatan">Sulawesi Selatan</option>
-                                <option value="Maluku Utara">Maluku Utara</option>
-                                <option value="Maluku">Maluku</option>
-                                <option value="Papua Barat">Papua Barat</option>
-                                <option value="Papua">Papua</option>
-                                <option value="Papua Tengah">Papua Tengah</option>
-                                <option value="Papua Pegunungan">Papua Pegunungan</option>
-                                <option value="Papua Selatan">Papua Selatan</option> -->
                                 </select>
                             </div>
                         <div class="form-group">
@@ -356,21 +500,25 @@ include "header.php"
                                 $harga = $row['366'];
                             } else {
                                 // Handle jika durasi tidak sesuai dengan kategori yang ada
-                                echo "Durasi tidak valid.";
-                                // Anda bisa tambahkan redirect atau pesan kesalahan lain sesuai kebutuhan
-                                exit;
+                                echo '<div class="result-container">';
+                                echo "<h3>Durasi tidak valid. Silakan masukkan durasi yang benar.</h3>";
+                                echo '</div>';
+                                // Set harga menjadi null untuk menghindari error
+                                $harga = null;
                             }
 
-                            // Tampilkan hasil harga ke pengguna
-                            echo '<div class="result-container">';
-                            echo '<h3>Harga Asuransi Rental Mobil untuk Provinsi ' . htmlspecialchars($provinsi) . ' selama ' . $durasi . ' hari adalah:</h3>';
-                            echo '<p>Rp ' . number_format($harga, 0, ',', '.') . '</p>';
-                            echo '</div>';
+                            // Tampilkan hasil harga ke pengguna jika valid
+                            if ($harga !== null) {
+                                echo '<div class="result-container">';
+                                echo '<h3>Harga Asuransi Rental Mobil untuk Provinsi ' . htmlspecialchars($provinsi) . ' selama ' . $durasi . ' hari adalah:</h3>';
+                                echo '<p>Rp ' . number_format($harga, 0, ',', '.') . '</p>';
+                                echo '</div>';
+                            }
                         } else {
                             // Handle jika data provinsi tidak ditemukan dalam tabel
-                            echo "Data provinsi tidak ditemukan.";
-                            // Anda bisa tambahkan redirect atau pesan kesalahan lain sesuai kebutuhan
-                            exit;
+                            echo '<div class="result-container">';
+                            echo "<h3>Data provinsi tidak ditemukan.</h3>";
+                            echo '</div>';
                         }
                     }
                     ?>
@@ -413,63 +561,158 @@ include "header.php"
             <div class="dropdown">
                 <div class="dropdown-title">Mengapa Asuransi Kami?</div>
                 <div class="dropdown-content">
-                    <h2 class="lead my-3">1. Kenyamanan</h2>
-                    <p class="lead my-3">Tidak perlu janji temu survei secara langsung. Cukup isi detail mobil rental Anda pada aplikasi.</p>
-                    <h2 class="lead my-3">2. Cepat</h2>
-                    <p class="lead my-3">Dapatkan persetujuan dalam waktu 24 jam setelah Anda mengirimkan pengajuan.</p>
-                    <h2 class="lead my-3">3. Terjangkau</h2>
-                    <p class="lead my-3">Temukan rencana asuransi yang ramah di kantong untuk mobil rental Anda.</p>
+                    <div class="why-us-container">
+                        <div class="why-us-item">
+                            <h3>Kenyamanan</h3>
+                            <p>Tidak perlu janji temu survei secara langsung. Cukup isi detail mobil rental Anda pada aplikasi.</p>
+                        </div>
+                        <div class="why-us-item">
+                            <h3>Cepat</h3>
+                            <p>Dapatkan persetujuan dalam waktu 24 jam setelah Anda mengirimkan pengajuan.</p>
+                        </div>
+                        <div class="why-us-item">
+                            <h3>Terjangkau</h3>
+                            <p>Temukan rencana asuransi yang ramah di kantong untuk mobil rental Anda.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="dropdown">
                 <div class="dropdown-title">Kriteria Kelayakan dan Cakupan Asuransi</div>
                 <div class="dropdown-content">
-                    <p class="lead my-3">Penjelasan tentang kriteria apa saja yang harus dipenuhi untuk mendapatkan asuransi, serta cakupan perlindungan yang diberikan.</p>
+                    <div class="criteria-container">
+                        <div class="criteria-item">
+                            <img src="images/kelayakan.png" alt="Eligibility Icon" class="criteria-icon">
+                            <h3>Kriteria Kelayakan</h3>
+                            <p>Mobil rental harus berusia tidak lebih dari 10 tahun dan dalam kondisi baik tanpa kerusakan besar yang tidak diperbaiki.</p>
+                        </div>
+                        <div class="criteria-item">
+                            <img src="images/driver.png" alt="Driver Icon" class="criteria-icon">
+                            <h3>Pengemudi yang Memenuhi Syarat</h3>
+                            <p>Pengemudi harus memiliki SIM yang sah dan berusia antara 21-65 tahun dengan pengalaman mengemudi minimal 2 tahun.</p>
+                        </div>
+                        <div class="criteria-item">
+                            <img src="images/cakupan.png" alt="Coverage Icon" class="criteria-icon">
+                            <h3>Cakupan Asuransi</h3>
+                            <p>Asuransi mencakup kerusakan akibat kecelakaan, pencurian, kebakaran, serta kerusakan pihak ketiga yang disebabkan oleh pengemudi.</p>
+                        </div>
+                        <div class="criteria-item">
+                            <img src="images/dokumen.png" alt="Document Icon" class="criteria-icon">
+                            <h3>Dokumen yang Diperlukan</h3>
+                            <p>Formulir aplikasi yang diisi, salinan SIM dan STNK, serta bukti pembayaran premi asuransi.</p>
+                        </div>
+                        <div class="criteria-item">
+                            <img src="images/exception.png" alt="Exclusions Icon" class="criteria-icon">
+                            <h3>Pengecualian</h3>
+                            <p>Kerusakan akibat penggunaan mobil untuk balapan, tindakan kriminal, atau kerusakan yang disengaja tidak termasuk dalam cakupan asuransi.</p>
+                        </div>
+                        <div class="criteria-item">
+                            <img src="images/help.png" alt="Roadside Assistance Icon" class="criteria-icon">
+                            <h3>Bantuan Darurat di Jalan</h3>
+                            <p>Termasuk layanan derek, penggantian ban, pengisian bahan bakar, dan bantuan kunci tertinggal dalam mobil.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="dropdown">
                 <div class="dropdown-title">Cara Daftar Asuransi</div>
                 <div class="dropdown-content">
-                <h2 class="lead my-3">1. Buka Aplikasi</h2>
-                    <p class="lead my-3">Mulai dengan membuka produk Asuransi di aplikasi.</p>
-                    <h2 class="lead my-3">2. Isi Jangka Waktu Rental Mobil Anda</h2>
-                    <p class="lead my-3">Beritahu kami berapa lama perjalanan akan Anda lakukan.</p>
-                    <h2 class="lead my-3">3. Pilih Rencana yang Anda Inginkan</h2>
-                    <p class="lead my-3">Temukan rencana asuransi yang ramah di kantong untuk mobil rental Anda.</p>
-                    <h2 class="lead my-3">4. Selesaikan Pembayaran Anda</h2>
-                    <p class="lead my-3">Pilih metode pembayaran yang Anda sukai dan ikuti petunjuk serta instruksi yang ada di layar.</p>
-                    <h2 class="lead my-3">5. Dapatkan Persetujuan</h2>
-                    <p class="lead my-3">Anda akan menerima polis asuransi mobil rental dan sertifikatnya melalui email dalam waktu 24 jam.</p>
+                    <div class="steps-container">
+                        <div class="step-item">
+                            <h3>1. Buka Aplikasi</h3>
+                            <p>Mulai dengan membuka produk Asuransi di aplikasi.</p>
+                        </div>
+                        <div class="step-item">
+                            <h3>2. Isi Jangka Waktu Rental Mobil Anda</h3>
+                            <p>Beritahu kami berapa lama perjalanan akan Anda lakukan.</p>
+                        </div>
+                        <div class="step-item">
+                            <h3>3. Pilih Rencana yang Anda Inginkan</h3>
+                            <p>Temukan rencana asuransi yang ramah di kantong untuk mobil rental Anda.</p>
+                        </div>
+                        <div class="step-item">
+                            <h3>4. Selesaikan Pembayaran Anda</h3>
+                            <p>Pilih metode pembayaran yang Anda sukai dan ikuti petunjuk serta instruksi yang ada di layar.</p>
+                        </div>
+                        <div class="step-item">
+                            <h3>5. Dapatkan Persetujuan</h3>
+                            <p>Anda akan menerima polis asuransi mobil rental dan sertifikatnya melalui email dalam waktu 24 jam.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="dropdown">
                 <div class="dropdown-title">Cara Klaim Asuransi</div>
                 <div class="dropdown-content">
-                    <p class="lead my-3">Prosedur yang harus diikuti ketika ingin melakukan klaim asuransi.</p>
+                <div class="claim-container">
+                        <div class="claim-left">
+                            <img src="images/blueCar.png" alt="Image description">
+                        </div>
+                        <div class="claim-right">
+                            <p class="lead my-3">Jika Anda baru saja mengalami kecelakaan, pertama pastikan bahwa semuanya tidak apa-apa.
+                                Lalu kumpulkan data-data tentang kejadian yang baru saja terjadi, seperti tempat, tanggal, waktu, dan lain-lain.
+                                Setelah itu Anda bisa menghubungi kami melalui:
+                            </p>
+                            <ul class="lead my-3">
+                                <li>1. 08xx-xxxx-xxxx</li>
+                                <li>2. Aplikasi Asuransi Rental Mobil</li>
+                            </ul>
+                            <p class="lead my-3">
+                                Utamakanlah keselamatan dalam berkendara.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="dropdown">
                 <div class="dropdown-title">Frequently Asked Questions (FAQ)</div>
                 <div class="dropdown-content">
-                    <p class="lead my-3">Pertanyaan-pertanyaan umum dan jawabannya terkait asuransi mobil rental.</p>
+                    <div class="faq-item">
+                        <div class="faq-question">1. Apa yang harus saya lakukan jika mobil saya mengalami kerusakan?</div>
+                        <div class="faq-answer">Anda harus melaporkan klaim melalui aplikasi kami dengan melengkapi formulir klaim dan mengunggah dokumen pendukung seperti foto kerusakan dan laporan polisi.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">2. Bagaimana cara mengajukan klaim asuransi?</div>
+                        <div class="faq-answer">Anda dapat mengajukan klaim melalui aplikasi kami dengan mengisi formulir klaim dan melampirkan dokumen pendukung seperti foto kerusakan dan laporan polisi. Tim kami akan memproses klaim Anda dalam waktu 24 jam.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">3. Berapa lama waktu yang dibutuhkan untuk mendapatkan persetujuan klaim?</div>
+                        <div class="faq-answer">Persetujuan klaim akan diberikan dalam waktu 24 jam setelah semua dokumen lengkap diterima.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">4. Apa saja dokumen yang harus saya siapkan untuk klaim asuransi?</div>
+                        <div class="faq-answer">Dokumen yang diperlukan meliputi formulir klaim yang telah diisi, foto kerusakan, dan laporan polisi jika ada.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">5. Apakah ada biaya tambahan untuk klaim asuransi?</div>
+                        <div class="faq-answer">Tidak, seluruh proses klaim ditangani tanpa biaya tambahan. Anda hanya perlu melengkapi dokumen yang diperlukan.</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-    document.querySelectorAll('.dropdown-title').forEach(title => {
-        title.addEventListener('click', () => {
-            const content = title.nextElementSibling;
-            content.style.display = content.style.display === 'block' ? 'none' : 'block';
-            title.classList.toggle('active');
+        document.querySelectorAll('.dropdown-title').forEach(title => {
+            title.addEventListener('click', () => {
+                const content = title.nextElementSibling;
+                content.style.display = content.style.display === 'block' ? 'none' : 'block';
+                title.classList.toggle('active');
+            });
         });
-    });
-</script>
+        document.querySelectorAll('.faq-question').forEach(faqQuestion => {
+            faqQuestion.addEventListener('click', () => {
+                faqQuestion.parentElement.classList.toggle('active');
+            });
+        });
+    </script>
+
+    <!-- INI MENU PENJELASAN PAKAI SIDEBAR-->
+
     <!-- <div id="detail">
         <div class="container4">
             <div class="sidebar">
@@ -515,8 +758,6 @@ include "header.php"
             </div>
         </div>
     </div> -->
-    <?php 
-    include "footer.php"
-?>
+
 </body>
 </html>
