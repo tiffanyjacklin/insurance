@@ -1,42 +1,6 @@
 from nameko.rpc import rpc
 
-import dependencies
-
-
-
-# nameko run insurance
-# nameko run gateway
-# nameko shell
-
-# n.rpc.insurance_service.get_all_category()
-# n.rpc.insurance_service.get_category_by_id(1)
-# n.rpc.insurance_service.add_category("Cancer Insurance")
-# n.rpc.insurance_service.edit_category(7, "Cancer Protection")
-# n.rpc.insurance_service.edit_category(8, "Cancer Protection")
-
-# n.rpc.insurance_service.get_all_insurance()
-# n.rpc.insurance_service.get_insurance_by_category(1)
-# n.rpc.insurance_service.get_insurance_by_id(1)
-# n.rpc.insurance_service.add_insurance(6, 0, "Cancer Optimal", 12000, "We understand that your health is precious, hence we offer health insurance with extensive coverage and various benefits to protect you and your loved ones. Have protection for you and your family against cancer risk with FWD Cancer Protection with a total sum insured up toRp 150.000.000", "You can be insured with FWD Cancer Protection Insurance if you are between the ages of 18 years old and 64 years old")
-# n.rpc.insurance_service.edit_insurance(82, 6, 0, "Cancer Optimal", 19000, "We understand that your health is precious, hence we offer health insurance with extensive coverage and various benefits to protect you and your loved ones. Have protection for you and your family against cancer risk with FWD Cancer Protection with a total sum insured up toRp 150.000.000", "You can be insured with FWD Cancer Protection Insurance if you are between the ages of 18 years old and 64 years old")
-
-# n.rpc.insurance_service.get_coverage_by_insurance_type(41)
-# n.rpc.insurance_service.get_coverage_by_id(1)
-# n.rpc.insurance_service.add_coverage(2, 2, "Keterlambatan Penerbangan", "Perlindungan Hingga Rp4.500.000. Jika penerbangan terlambat, anda bisa mendapatkan kompensasi Rp750.000 per 4 jam keterlambatan (total maksimal sesuai paket dipilih). Perlindungan ini hanya berlaku hanya jika asuransi dibeli selambatanya 2 hari sebelum tanggal keberangkatan.", 0)
-# n.rpc.insurance_service.edit_coverage(22, 2, 2, "Keterlambatan Penerbangan", "Perlindungan Hingga Rp4.500.000. Jika penerbangan terlambat, anda bisa mendapatkan kompensasi Rp750.000 per 4 jam keterlambatan (total maksimal sesuai paket dipilih). Perlindungan ini hanya berlaku hanya jika asuransi dibeli selambatanya 2 hari sebelum tanggal keberangkatan.", 1)
-
-# n.rpc.insurance_service.get_all_purchase_by_user(1)
-# n.rpc.insurance_service.get_purchase_by_id(1)
-# n.rpc.insurance_service.add_purchase(1, None, 1, 1, 0)
-
-# n.rpc.insurance_service.get_all_payment_by_user(1)
-# n.rpc.insurance_service.get_payment_by_id(1)
-# n.rpc.insurance_service.add_payment(1, 2, 3, "085512341234")
-
-# n.rpc.insurance_service.get_all_claim_by_user(1)
-# n.rpc.insurance_service.get_claim_by_id(1)
-# n.rpc.insurance_service.add_claim(1, 3, 2, "LINK GATAU AH", 0)
-# n.rpc.insurance_service.edit_status_claim(3, 2)
+from insurance import dependencies
 
 class insuranceService:
 

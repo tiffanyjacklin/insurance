@@ -2,11 +2,20 @@ import json
 
 from nameko.rpc import RpcProxy
 from nameko.web.handlers import http
+from datetime import date
 
+class GatewayService(object):
+    """
+    Service acts as a gateway to other services over http.
+    """
 
-class GatewayService:
     name = 'gateway'
-
+    header = {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, GET, PUT, DELETE",
+        "Access-Control-Allow-Headers": "*",
+        "Content-type": "application/json"
+    }
     insurance_rpc = RpcProxy('insurance_service')
 
     # KATEGORI ASURANSI
