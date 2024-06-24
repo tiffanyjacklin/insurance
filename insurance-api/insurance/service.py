@@ -143,6 +143,7 @@ class InsuranceService:
             'code': 200,
             'data': purchase
         }
+        
     @rpc
     def get_price(self, kategori, tujuan, adult, child, start_date, end_date):
         price = self.database.get_price(kategori, tujuan, adult, child, start_date, end_date)

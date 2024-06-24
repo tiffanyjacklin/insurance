@@ -107,7 +107,7 @@ class GatewayService(object):
         purchase = self.insurance_rpc.get_purchase_by_id(id_user, id_pembelian)
         return purchase['code'],json.dumps(purchase['data'])
     
-    @http('GET', '/insurance/purchase')
+    @http('POST', '/insurance/price')
     def get_price(self, request):
         data = json.loads(request.get_data(as_text=True))
         purchase = self.insurance_rpc.get_price(data['kategori'], data['tujuan'], data['adult'], data['child'], data['start_date'], data['end_date'])

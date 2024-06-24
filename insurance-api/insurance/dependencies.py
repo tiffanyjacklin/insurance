@@ -378,14 +378,7 @@ class DatabaseWrapper:
         end_date            = end_date.strftime('%Y-%m-%d')
         jumlah_orang        = adult + child
         
-        tipe_asuransi = self.get_insurance_by_category_and_dest(kategori, tujuan)
-        id_kategori = self.get_category_id_by_name(kategori)
-        id_tipe_asuransi = 0 
-        if (id_kategori['id_kategori'] == 1):
-            id_tipe_asuransi = tipe_asuransi['id_travel']
-        else:
-            id_tipe_asuransi = tipe_asuransi['id_car']
-        
+        tipe_asuransi = self.get_insurance_by_category_and_dest(kategori, tujuan)        
         days = jumlah_hari
         total_bayar = 0
         while (days > 0):
@@ -417,7 +410,6 @@ class DatabaseWrapper:
                 total_bayar += tipe_asuransi['1-4']
                 days -= 4
                 
-        self.connection.commit()
         cursor.close()
         return total_bayar
 
