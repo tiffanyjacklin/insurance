@@ -15,7 +15,7 @@ class HttpEntrypoint(HttpRequestHandler):
     mapped_errors = {
         BadRequest: (400, 'BAD_REQUEST'),
         ValidationError: (400, 'VALIDATION_ERROR'),
-        ProductNotFound: (404, 'INSURANCE_NOT_FOUND'),
+        InsuranceNotFound: (404, 'INSURANCE_NOT_FOUND'),
     }
 
     def response_from_exception(self, exc):

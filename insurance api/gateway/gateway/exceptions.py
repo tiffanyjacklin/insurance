@@ -14,6 +14,6 @@ def remote_error(exc_path):
 
     return wrapper
 
-@remote_error('products.exceptions.NotFound')
+@remote_error('insurance.exceptions.NotFound')
 class InsuranceNotFound(Exception):
     pass
