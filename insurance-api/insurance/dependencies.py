@@ -378,7 +378,7 @@ class DatabaseWrapper:
         end_date            = end_date.strftime('%Y-%m-%d')
         jumlah_orang        = adult + child
         
-        tipe_asuransi = self.get_insurance_by_category_and_dest(kategori, tujuan)        
+        tipe_asuransi = self.get_insurance_by_category_and_dest(kategori, tujuan)
         days = jumlah_hari
         total_bayar = 0
         while (days > 0):
