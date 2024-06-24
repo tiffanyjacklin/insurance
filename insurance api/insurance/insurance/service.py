@@ -2,7 +2,7 @@ from nameko.rpc import rpc
 
 from insurance import dependencies
 
-class insuranceService:
+class InsuranceService:
 
     name = 'insurance_service'
 
