@@ -1,7 +1,28 @@
 <?php
 session_start();
 require "connect.php";
-include "header.php"
+include "header.php";
+
+$insuranceApiUrl = 'http://ec2-52-7-154-154.compute-1.amazonaws.com:8005/insurance';
+$insuranceData = @file_get_contents($insuranceApiUrl);
+if ($insuranceData === FALSE) {
+    die('Error fetching insurance categories from API');
+}
+$insuranceCategories = json_decode($insuranceData, true);
+if ($insuranceCategories === NULL) {
+    die('Error decoding JSON data');
+}
+
+// Map insurance categories to their corresponding icons and URLs
+$categoryIcons = [
+    'Travel Insurance' => 'fa-plane-departure',
+    'Car Insurance' => 'fa-car'
+];
+$categoryUrls = [
+    'Travel Insurance' => 'travel_insurance.php',
+    'Car Insurance' => 'car_insurance.php'
+];
+
 ?>
 
 <body>
@@ -19,7 +40,7 @@ include "header.php"
     <div class="container text-center title">
         <div class="title-form">Learn more about our products</div>
     </div>
-    <div class="container text-center">
+    <!-- <div class="container text-center">
         <div class="content1">
             <div class="card mb-3 custom-card">
                 <div class="card-body d-flex justify-content-center align-items-center">
@@ -28,10 +49,30 @@ include "header.php"
                             <i class="fa-solid fa-plane-departure fa-xl mb-2" style="color: #1ba0e2;"></i><br>
                             <div class="insurance-title">Travel Insurance</div>
                         </button>
-                        <button class="btn btn-outline-secondary" onclick="window.location.href='carInsurance.php'">
+                        <button class="btn btn-outline-secondary" onclick="window.location.href='car_insurance.php'">
                             <i class="fa-solid fa-car fa-xl mb-2" style="color: #1ba0e2;"></i><br>
                             <div class="insurance-title">Car Insurance</div>
                         </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="container text-center">
+        <div class="content1">
+            <div class="card mb-3 custom-card">
+                <div class="card-body d-flex justify-content-center align-items-center">
+                    <div class="button-container">
+                        <?php foreach ($insuranceCategories as $category): ?>
+                            <?php 
+                                $iconClass = isset($categoryIcons[$category['nama_kategori']]) ? $categoryIcons[$category['nama_kategori']] : 'fa-solid fa-shield-alt';
+                                $url = isset($categoryUrls[$category['nama_kategori']]) ? $categoryUrls[$category['nama_kategori']] : '#';
+                            ?>
+                            <button class="btn btn-outline-secondary" onclick="window.location.href='<?php echo $url; ?>'">
+                                <i class="fa-solid <?php echo $iconClass; ?> fa-xl mb-2" style="color: #1ba0e2;"></i><br>
+                                <div class="insurance-title"><?php echo htmlspecialchars($category['nama_kategori']); ?></div>
+                            </button>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
