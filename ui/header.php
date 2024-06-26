@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="assets/solid.min.css" type="text/css">
     <link rel="stylesheet" href="assets/all.min.css" type="text/css">
     <link rel="stylesheet" href="assets/blog.css" type="text/css">
-    <link rel="stylesheet" href="assets/style.css" type="text/css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
@@ -23,5 +22,5 @@
     <link href="assets/datatables/datatables.css" rel="stylesheet">
     <script src="assets/datatables/datatables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script>
-    <title>Insurance </title>
+    <title>Insurance</title>
 </head>

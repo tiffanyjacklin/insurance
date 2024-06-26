@@ -1,6 +1,5 @@
 <?php
 session_start();
-require "connect.php";
 include "header.php";
 
 $insuranceApiUrl = 'http://ec2-52-7-154-154.compute-1.amazonaws.com:8005/insurance';
@@ -40,24 +39,6 @@ $categoryUrls = [
     <div class="container text-center title">
         <div class="title-form">Learn more about our products</div>
     </div>
-    <!-- <div class="container text-center">
-        <div class="content1">
-            <div class="card mb-3 custom-card">
-                <div class="card-body d-flex justify-content-center align-items-center">
-                    <div class="button-container">
-                        <button class="btn btn-outline-secondary" onclick="window.location.href='travel_insurance.php'">
-                            <i class="fa-solid fa-plane-departure fa-xl mb-2" style="color: #1ba0e2;"></i><br>
-                            <div class="insurance-title">Travel Insurance</div>
-                        </button>
-                        <button class="btn btn-outline-secondary" onclick="window.location.href='car_insurance.php'">
-                            <i class="fa-solid fa-car fa-xl mb-2" style="color: #1ba0e2;"></i><br>
-                            <div class="insurance-title">Car Insurance</div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div class="container text-center">
         <div class="content1">
             <div class="card mb-3 custom-card">
@@ -86,7 +67,7 @@ $categoryUrls = [
                 <p class="partner">We are partnering with trusted and reliable insurance providers to give you the best protection.</p>
             </div>
             <div class="col-md-8">
-                <img src="images/official.png" alt="Partnership">
+                <img src="images/official.png" style="width: 100% !important;" alt="Partnership">
             </div>
         </div>
     </div>

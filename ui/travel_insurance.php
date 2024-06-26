@@ -1,6 +1,5 @@
 <?php
 session_start();
-require "connect.php";
 include "header.php";
 
 $defaultCountryId = isset($_GET['country_id']) ? intval($_GET['country_id']) : 1;
