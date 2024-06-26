@@ -12,7 +12,7 @@ class GatewayService(object):
     name = 'gateway'
     header = {
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST, GET, PUT, DELETE",
+        "Access-Control-Allow-Methods": "*",
         "Access-Control-Allow-Headers": "*",
         "Content-type": "application/json"
     }
@@ -136,3 +136,9 @@ class GatewayService(object):
         data = json.loads(request.get_data(as_text=True))
         payment = self.insurance_rpc.add_payment(data['id_user'], data['id_pembelian'], data['jenis_pembayaran'], data['nomor'])
         return payment['code'], self.header, json.dumps(payment['data'])
+
+
+    # Handle OPTIONS requests for CORS
+    @http('OPTIONS', '/insurance')
+    def options_user(self, request):
+        return 200, self.header, ""
