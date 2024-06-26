@@ -2,7 +2,7 @@
 session_start();
 include "header.php";
 
-$insuranceApiUrl = 'http://ec2-52-7-154-154.compute-1.amazonaws.com:8005/insurance';
+$insuranceApiUrl = 'http://52.7.154.154:8005/insurance';
 $insuranceData = @file_get_contents($insuranceApiUrl);
 if ($insuranceData === FALSE) {
     die('Error fetching insurance categories from API');
@@ -25,6 +25,9 @@ $categoryUrls = [
 ?>
 
 <body>
+    <?php
+    include('navbar.php');
+    ?>
     <div class="bg-body-index">
         <div class="container">
             <div class="content">

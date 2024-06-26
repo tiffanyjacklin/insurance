@@ -3,7 +3,7 @@ session_start();
 include "header.php";
 
 // Provinsi
-$urlProvinsi = 'http://ec2-52-7-154-154.compute-1.amazonaws.com:8005/insurance/car_insurance/all';
+$urlProvinsi = 'http://52.7.154.154:8005/insurance/car_insurance/all';
 $chProvinsi = curl_init($urlProvinsi);
 curl_setopt($chProvinsi, CURLOPT_RETURNTRANSFER, true);
 $responseForProvinsi = curl_exec($chProvinsi);
@@ -30,7 +30,6 @@ $Provinsi = $daftarProvinsi;
     <title>Car Rental Insurance</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
 
@@ -41,7 +40,6 @@ $Provinsi = $daftarProvinsi;
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
-            background-color: #fff;
         }
 
         .header .logo {
@@ -99,7 +97,7 @@ $Provinsi = $daftarProvinsi;
             gap: 20px;
             padding: 20px;
             background-color: #fff;
-        }
+        } 
 
         .insurance-types .type {
             text-align: center;
@@ -487,6 +485,9 @@ $Provinsi = $daftarProvinsi;
 </head>
 
 <body>
+    <?php
+    include('navbar.php');
+    ?>
     <div class="bg-body-index">
         <div class="container">
             <div class="content">
@@ -544,7 +545,7 @@ $Provinsi = $daftarProvinsi;
                     }
 
                     // URL to fetch the car insurance data
-                    $urlInsurance = 'http://ec2-52-7-154-154.compute-1.amazonaws.com:8005/insurance/car_insurance/all';
+                    $urlInsurance = 'http://52.7.154.154:8005/insurance/car_insurance/all';
                     $insuranceData = fetchDataFromAPI($urlInsurance);
 
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
@@ -813,6 +814,10 @@ $Provinsi = $daftarProvinsi;
             </div>
         </div>
     </div>
+
+    <?php
+    include('footer.php');
+    ?>
 
     <script>
         document.querySelectorAll('.dropdown-title').forEach(title => {

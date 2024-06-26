@@ -5,7 +5,7 @@ include "header.php";
 $defaultCountryId = isset($_GET['country_id']) ? intval($_GET['country_id']) : 1;
 
 // Fetch all countries data from API
-$allCountriesApiUrl = 'http://ec2-52-7-154-154.compute-1.amazonaws.com:8005/insurance/travel/all';
+$allCountriesApiUrl = 'http://52.7.154.154:8005/insurance/travel/all';
 $allCountriesData = @file_get_contents($allCountriesApiUrl);
 if ($allCountriesData === FALSE) {
     die('Error fetching all countries data from API');
@@ -16,7 +16,7 @@ if ($allCountries === NULL) {
 }
 
 // Fetch specific country data from API
-$countryApiUrl = 'http://ec2-52-7-154-154.compute-1.amazonaws.com:8005/insurance/travel/' . $defaultCountryId;
+$countryApiUrl = 'http://52.7.154.154:8005/insurance/travel/' . $defaultCountryId;
 $countryData = @file_get_contents($countryApiUrl);
 if ($countryData === FALSE) {
     die('Error fetching country data from API');
@@ -308,6 +308,9 @@ foreach ($allCountries as $country) {
 </head>
 
 <body>
+    <?php
+    include('navbar.php');
+    ?>
     <div class="bg-body-index">
         <div class="container">
             <div class="content">
@@ -635,7 +638,9 @@ foreach ($allCountries as $country) {
                 </div>
             </div>
         </div>
-
+        <?php
+            include('footer.php');
+            ?>
         <script>
             document.querySelectorAll('.section-syarat h2').forEach(sectionHeader => {
                 sectionHeader.addEventListener('click', () => {
