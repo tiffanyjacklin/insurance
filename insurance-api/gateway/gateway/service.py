@@ -14,9 +14,14 @@ class GatewayService(object):
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "*",
         "Access-Control-Allow-Headers": "*",
-        "Content-type": "application/json"
+        # "Content-type": "application/json"
     }
     insurance_rpc = RpcProxy('insurance_service')
+
+    # Handle OPTIONS requests for CORS
+    # @http('OPTIONS', '/insurance')
+    # def options_user(self, request):
+    #     return 200, self.header, ""
 
     # KATEGORI ASURANSI
 
@@ -138,7 +143,3 @@ class GatewayService(object):
         return payment['code'], self.header, json.dumps(payment['data'])
 
 
-    # Handle OPTIONS requests for CORS
-    @http('OPTIONS', '/insurance')
-    def options_user(self, request):
-        return 200, self.header, ""
