@@ -118,6 +118,11 @@ class GatewayService(object):
         purchase = self.insurance_rpc.get_price(data['kategori'], data['tujuan'], data['adult'], data['child'], data['start_date'], data['end_date'])
         return purchase['code'], self.header, json.dumps(purchase['data'])
 
+    @http('GET', '/insurance/price/<kategori>/<tujuan>/<int:adult>/<int:child>/<string:start_date>/<string:end_date>')
+    def get_price(self, request, kategori, tujuan, adult, child, start_date, end_date):
+        purchase = self.insurance_rpc.get_price(kategori, tujuan, adult, child, start_date, end_date)
+        return purchase['code'], self.header, json.dumps(purchase['data'])
+
     @http('POST', '/insurance/purchase/add')
     def add_purchase(self, request):
         data = json.loads(request.get_data(as_text=True))

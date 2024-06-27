@@ -370,12 +370,13 @@ class DatabaseWrapper:
     def get_price(self, kategori, tujuan, adult, child, start_date, end_date):
         cursor = self.connection.cursor(dictionary=True)
         
+        # datetime.strptime(start_date, '%d-%m-%Y')
         current_timestamp   = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        start_date          = datetime.strptime(start_date, '%d-%m-%Y')
-        end_date            = datetime.strptime(end_date, '%d-%m-%Y')
+        start_date          = datetime.strptime(start_date, '%Y-%m-%d')
+        end_date            = datetime.strptime(end_date, '%Y-%m-%d')
         jumlah_hari         = (end_date-start_date).days + 1
-        start_date          = start_date.strftime('%Y-%m-%d')
-        end_date            = end_date.strftime('%Y-%m-%d')
+        # start_date          = start_date.strftime('%Y-%m-%d')
+        # end_date            = end_date.strftime('%Y-%m-%d')
         jumlah_orang        = adult + child
         
         tipe_asuransi = self.get_insurance_by_category_and_dest(kategori, tujuan)

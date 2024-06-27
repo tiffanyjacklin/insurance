@@ -2,11 +2,17 @@ import json
 
 from nameko.rpc import RpcProxy
 from nameko.web.handlers import http
-
+from datetime import datetime
+from datetime import date
 
 class GatewayService:
     name = 'gateway'
-
+    header = {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "*",
+        "Access-Control-Allow-Headers": "*",
+        # "Content-type": "application/json"
+    }
     insurance_rpc = RpcProxy('insurance_service')
 
     # KATEGORI ASURANSI
@@ -102,6 +108,11 @@ class GatewayService:
     def get_price(self, request):
         data = json.loads(request.get_data(as_text=True))
         purchase = self.insurance_rpc.get_price(data['kategori'], data['tujuan'], data['adult'], data['child'], data['start_date'], data['end_date'])
+        return purchase['code'], self.header, json.dumps(purchase['data'])
+    
+    @http('GET', '/insurance/price/<kategori>/<tujuan>/<int:adult>/<int:child>/<string:start_date>/<string:end_date>')
+    def get_price(self, request, kategori, tujuan, adult, child, start_date, end_date):
+        purchase = self.insurance_rpc.get_price(kategori, tujuan, adult, child, start_date, end_date)
         return purchase['code'], self.header, json.dumps(purchase['data'])
 
     @http('POST', '/insurance/purchase/add')
