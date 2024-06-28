@@ -451,8 +451,8 @@ class DatabaseWrapper:
             else:
                 total_bayar += tipe_asuransi['1-4']
                 days -= 4
-        if id_kategori == 1:
-            total_bayar *= jumlah_orang
+        if id_kategori['id_kategori'] == 1:
+            total_bayar = total_bayar * jumlah_orang
 
         sql = "INSERT INTO `pembelian_asuransi` (`id_user`, `id_booking`, `id_kategori`, `id_tipe_asuransi`, `jumlah_orang`, `jumlah_hari`, `start_date`, `end_date`, `total_bayar`, `timestamp`, `status_pembayaran`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(sql, (id_user, id_booking, id_kategori['id_kategori'], id_tipe_asuransi, jumlah_orang, jumlah_hari, start_date, end_date, total_bayar, current_timestamp, 0))
@@ -513,8 +513,8 @@ class DatabaseWrapper:
                 total_bayar += tipe_asuransi['1-4']
                 days -= 4
         
-        if id_kategori == 1:
-            total_bayar *= jumlah_orang
+        if id_kategori['id_kategori'] == 1:
+            total_bayar = total_bayar * jumlah_orang
         cursor.close()
         return total_bayar
 
