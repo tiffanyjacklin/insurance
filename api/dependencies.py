@@ -75,7 +75,7 @@ class DatabaseWrapper:
         result = cursor.fetchone()
         id = result['id_kategori'] + 1
         cursor.close()
-        return self.get_category_by_id(id)
+        return id
 
     def add_category(self, nama_kategori):
         cursor = self.connection.cursor(dictionary=True)
