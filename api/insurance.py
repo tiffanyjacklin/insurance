@@ -241,6 +241,6 @@ class insuranceService:
         }
         return {
                 'code': 404,
-                "data": "Claim ID Invalid."
+                "data": "Purchase ID Invalid."
         }
     

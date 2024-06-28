@@ -34,7 +34,7 @@ class DatabaseWrapper:
     def get_category_by_name(self, kategori):
         cursor = self.connection.cursor(dictionary=True)
         sql = "SELECT * FROM `kategori_asuransi` WHERE `nama_kategori` LIKE %s LIMIT 1;"
-        cursor.execute(sql, ("%{}%".format(kategori),))  # Use a parameter for kategori
+        cursor.execute(sql, ("%{}%".format(kategori),)) 
         result = cursor.fetchone()
         cursor.close()
         return result
@@ -42,7 +42,7 @@ class DatabaseWrapper:
     def get_category_id_by_name(self, kategori):
         cursor = self.connection.cursor(dictionary=True)
         sql = "SELECT `id_kategori` FROM `kategori_asuransi` WHERE `nama_kategori` LIKE %s LIMIT 1;"
-        cursor.execute(sql, ("%{}%".format(kategori),))  # Use a parameter for kategori
+        cursor.execute(sql, ("%{}%".format(kategori),)) 
         result = cursor.fetchone()
         cursor.close()
         return result
@@ -70,14 +70,23 @@ class DatabaseWrapper:
         cursor.close()
         return res
 
+    def get_latest_category_id(self):
+        cursor = self.connection.cursor(dictionary=True)
+        sql = "SELECT * FROM `kategori_asuransi` ORDER BY `id_kategori` DESC  LIMIT 1"
+        cursor.execute(sql)
+        result = cursor.fetchone()
+        id = result['id_kategori'] + 1
+        cursor.close()
+        return self.get_category_by_id(id)
 
     def add_category(self, nama_kategori):
         cursor = self.connection.cursor(dictionary=True)
+        id_kategori = self.get_latest_category_id()
         sql_insert_category = "INSERT INTO `kategori_asuransi` (`nama_kategori`) VALUES (%s);"
         cursor.execute(sql_insert_category, (nama_kategori,))
         self.connection.commit() 
         cursor.close()
-        return True
+        return get_category_by_id(id_kategori)
 
     def edit_category(self, id_kategori, nama_kategori):
         cursor = self.connection.cursor(dictionary=True)
@@ -275,9 +284,27 @@ class DatabaseWrapper:
         cursor.close()
         return result
 
+    def get_latest_insurance(self, id_kategori):
+        cursor = self.connection.cursor(dictionary=True)
+        id = 1
+        
+        if id_kategori == 1:
+            sql = "SELECT * FROM `travel_insurance` ORDER BY `id_travel` DESC  LIMIT 1"
+            cursor.execute(sql)
+            result = cursor.fetchone()
+            id = result['id_travel'] + 1
+        elif id_kategori == 2:
+            sql = "SELECT * FROM `car_insurance` ORDER BY `id_car` DESC  LIMIT 1"
+            cursor.execute(sql)
+            result = cursor.fetchone()
+            id = result['id_car'] + 1
+        cursor.close()
+        return id
+
     def add_insurance(self, kategori, tujuan, empat, enam, delapan, sepuluh, limabelas, duapuluh, dualima, tigapuluh, setahun):
         cursor = self.connection.cursor(dictionary=True)
         id_kategori = self.get_category_id_by_name(kategori)
+        id_insurance = self.get_latest_insurance(id_kategori['id_kategori'])
 
         if (id_kategori['id_kategori'] == 1):
             if (tujuan == 'Indonesia'):
@@ -292,7 +319,7 @@ class DatabaseWrapper:
 
         self.connection.commit()
         cursor.close()
-        return True
+        return self.get_insurance_by_category_and_id(kategori, id_asuransi)
 
     def edit_insurance(self, kategori, id_tipe_asuransi, tujuan, empat, enam, delapan, sepuluh, limabelas, duapuluh, dualima, tigapuluh, setahun):
         cursor = self.connection.cursor(dictionary=True)
@@ -367,19 +394,95 @@ class DatabaseWrapper:
         cursor.close()
         return result['total_bayar'] if result else None
 
+    def get_latest_purchase_id(self):
+        cursor = self.connection.cursor(dictionary=True)
+        sql = "SELECT * FROM `pembelian_asuransi` ORDER BY `id_pembelian` DESC  LIMIT 1"
+        cursor.execute(sql)
+        result = cursor.fetchone()
+        id = result['id_pembelian'] + 1
+        cursor.close()
+        return id
+
+    def add_purchase(self, id_user, id_booking, kategori, tujuan, adult, child, start_date, end_date):
+        cursor = self.connection.cursor(dictionary=True)
+        
+        current_timestamp   = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        start_date          = datetime.strptime(start_date, '%d-%m-%Y')
+        end_date            = datetime.strptime(end_date, '%d-%m-%Y')
+        jumlah_hari         = (end_date-start_date).days + 1
+        start_date          = start_date.strftime('%Y-%m-%d')
+        end_date            = end_date.strftime('%Y-%m-%d')
+        jumlah_orang        = adult + child
+        
+        tipe_asuransi = self.get_insurance_by_category_and_dest(kategori, tujuan)
+        id_kategori = self.get_category_id_by_name(kategori)
+        id_tipe_asuransi = 0 
+        if (id_kategori['id_kategori'] == 1):
+            id_tipe_asuransi = tipe_asuransi['id_travel']
+        else:
+            id_tipe_asuransi = tipe_asuransi['id_car']
+        id_beli = self.get_latest_purchase_id()
+        days = jumlah_hari
+        total_bayar = 0
+        while (days > 0):
+            if (days > 366):
+                total_bayar += tipe_asuransi['366']
+                days -= 366
+            elif (days > 25):
+                total_bayar += tipe_asuransi['26-30']
+                days -= 30
+            elif (days > 20):
+                total_bayar += tipe_asuransi['21-25']
+                days -= 25
+            elif (days > 15):
+                total_bayar += tipe_asuransi['16-20']
+                days -= 20
+            elif (days > 10):
+                total_bayar += tipe_asuransi['11-15']
+                days -= 15    
+            elif (days > 8):
+                total_bayar += tipe_asuransi['9-10']
+                days -= 10
+            elif (days > 6):
+                total_bayar += tipe_asuransi['7-8']
+                days -= 8
+            elif (days > 4):
+                total_bayar += tipe_asuransi['5-6']
+                days -= 6
+            else:
+                total_bayar += tipe_asuransi['1-4']
+                days -= 4
+        if id_kategori == 1:
+            total_bayar *= jumlah_orang
+
+        sql = "INSERT INTO `pembelian_asuransi` (`id_user`, `id_booking`, `id_kategori`, `id_tipe_asuransi`, `jumlah_orang`, `jumlah_hari`, `start_date`, `end_date`, `total_bayar`, `timestamp`, `status_pembayaran`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(sql, (id_user, id_booking, id_kategori['id_kategori'], id_tipe_asuransi, jumlah_orang, jumlah_hari, start_date, end_date, total_bayar, current_timestamp, 0))
+        self.connection.commit()
+        cursor.close()
+        return self.get_purchase_by_id(id_user, id_beli)
+
+    def edit_purchase_status(self, id_pembelian, status_pembayaran):
+        cursor = self.connection.cursor(dictionary=True)
+        sql_update_purchase = "UPDATE `pembelian_asuransi` SET `status_pembayaran` = %s WHERE `id_pembelian` = %s;"
+        cursor.execute(sql_update_purchase, (status_pembayaran, id_pembelian))
+        self.connection.commit()
+        cursor.close()
+        
+        return True
+
+    # Harga Asuransi
+
     def get_price(self, kategori, tujuan, adult, child, start_date, end_date):
         cursor = self.connection.cursor(dictionary=True)
         
-        # datetime.strptime(start_date, '%d-%m-%Y')
         current_timestamp   = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         start_date          = datetime.strptime(start_date, '%Y-%m-%d')
         end_date            = datetime.strptime(end_date, '%Y-%m-%d')
         jumlah_hari         = (end_date-start_date).days + 1
-        # start_date          = start_date.strftime('%Y-%m-%d')
-        # end_date            = end_date.strftime('%Y-%m-%d')
         jumlah_orang        = adult + child
         
         tipe_asuransi = self.get_insurance_by_category_and_dest(kategori, tujuan)
+        id_kategori = self.get_category_id_by_name(kategori)
         days = jumlah_hari
         total_bayar = 0
         while (days > 0):
@@ -411,74 +514,11 @@ class DatabaseWrapper:
                 total_bayar += tipe_asuransi['1-4']
                 days -= 4
                 
+        if id_kategori == 1:
+            total_bayar *= jumlah_orang
+
         cursor.close()
         return total_bayar
-
-    # def add_purchase(self, id_user, id_booking, id_tipe_asuransi, jumlah, status_pembayaran):
-    def add_purchase(self, id_user, id_booking, kategori, tujuan, adult, child, start_date, end_date):
-        cursor = self.connection.cursor(dictionary=True)
-        
-        current_timestamp   = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        start_date          = datetime.strptime(start_date, '%d-%m-%Y')
-        end_date            = datetime.strptime(end_date, '%d-%m-%Y')
-        jumlah_hari         = (end_date-start_date).days + 1
-        start_date          = start_date.strftime('%Y-%m-%d')
-        end_date            = end_date.strftime('%Y-%m-%d')
-        jumlah_orang        = adult + child
-        
-        tipe_asuransi = self.get_insurance_by_category_and_dest(kategori, tujuan)
-        id_kategori = self.get_category_id_by_name(kategori)
-        id_tipe_asuransi = 0 
-        if (id_kategori['id_kategori'] == 1):
-            id_tipe_asuransi = tipe_asuransi['id_travel']
-        else:
-            id_tipe_asuransi = tipe_asuransi['id_car']
-        
-        days = jumlah_hari
-        total_bayar = 0
-        while (days > 0):
-            if (days > 366):
-                total_bayar += tipe_asuransi['366']
-                days -= 366
-            elif (days > 25):
-                total_bayar += tipe_asuransi['26-30']
-                days -= 30
-            elif (days > 20):
-                total_bayar += tipe_asuransi['21-25']
-                days -= 25
-            elif (days > 15):
-                total_bayar += tipe_asuransi['16-20']
-                days -= 20
-            elif (days > 10):
-                total_bayar += tipe_asuransi['11-15']
-                days -= 15    
-            elif (days > 8):
-                total_bayar += tipe_asuransi['9-10']
-                days -= 10
-            elif (days > 6):
-                total_bayar += tipe_asuransi['7-8']
-                days -= 8
-            elif (days > 4):
-                total_bayar += tipe_asuransi['5-6']
-                days -= 6
-            else:
-                total_bayar += tipe_asuransi['1-4']
-                days -= 4
-        
-        sql = "INSERT INTO `pembelian_asuransi` (`id_user`, `id_booking`, `id_kategori`, `id_tipe_asuransi`, `jumlah_orang`, `jumlah_hari`, `start_date`, `end_date`, `total_bayar`, `timestamp`, `status_pembayaran`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(sql, (id_user, id_booking, id_kategori['id_kategori'], id_tipe_asuransi, jumlah_orang, jumlah_hari, start_date, end_date, total_bayar, current_timestamp, 0))
-        self.connection.commit()
-        cursor.close()
-        return total_bayar
-
-    def edit_purchase_status(self, id_pembelian, status_pembayaran):
-        cursor = self.connection.cursor(dictionary=True)
-        sql_update_purchase = "UPDATE `pembelian_asuransi` SET `status_pembayaran` = %s WHERE `id_pembelian` = %s;"
-        cursor.execute(sql_update_purchase, (status_pembayaran, id_pembelian))
-        self.connection.commit()
-        cursor.close()
-        
-        return True
 
 
     # Pembayaran Asuransi
@@ -504,25 +544,6 @@ class DatabaseWrapper:
                 'nomor_rekening': row['nomor_rekening'],
                 'nomor_telepon': row['nomor_telepon']
             })
-        # for row in cursor.fetchall():
-        #     data = {
-        #         'id_pembayaran': row['id_pembayaran'],
-        #         'id_user': row['id_user'],
-        #         'id_pembelian': row['id_pembelian'],
-        #         'timestamp': row['timestamp'],
-        #         'total_bayar': row['total_bayar'],
-        #         'pajak': row['pajak'],
-        #         'jenis_pembayaran': row['jenis_pembayaran'],
-        #     }
-
-        #     if row['nomor_kartu'] is not None:
-        #         data['nomor_kartu'] = row['nomor_kartu']
-        #     if row['nomor_rekening'] is not None:
-        #         data['nomor_rekening'] = row['nomor_rekening']
-        #     if row['nomor_telepon'] is not None:
-        #         data['nomor_telepon'] = row['nomor_telepon']
-        
-        #     result.append(data)
 
         cursor.close()
 
@@ -542,8 +563,19 @@ class DatabaseWrapper:
 
         return result
     
+    def get_latest_payment_id(self):
+        cursor = self.connection.cursor(dictionary=True)
+        sql = "SELECT * FROM `pembayaran_asuransi` ORDER BY `id_pembayaran` DESC  LIMIT 1"
+        cursor.execute(sql)
+        result = cursor.fetchone()
+        id = result['id_pembayaran'] + 1
+        cursor.close()
+        return id
+    
     def add_payment(self, id_user, id_pembelian, jenis_pembayaran, nomor):
         current_timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        id_payment = self.get_latest_payment_id()
+
         total_bayar = self.get_purchase_total_by_id(id_pembelian)
         if total_bayar is None:
             raise ValueError("Invalid purchase ID")  # Handle invalid purchase ID case
@@ -560,7 +592,7 @@ class DatabaseWrapper:
         cursor.execute(sql, (id_user, id_pembelian, current_timestamp, total_bayar, pajak, jenis_pembayaran, nomor))
         self.connection.commit()
         cursor.close()
-        return True
+        return self.get_payment_by_id(id_user, id_payment)
     
     def __del__(self):
        self.connection.close()
