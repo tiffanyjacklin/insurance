@@ -34,7 +34,7 @@ class DatabaseWrapper:
     def get_category_by_name(self, kategori):
         cursor = self.connection.cursor(dictionary=True)
         sql = "SELECT * FROM `kategori_asuransi` WHERE `nama_kategori` LIKE %s LIMIT 1;"
-        cursor.execute(sql, ("%{}%".format(kategori),)) 
+        cursor.execute(sql, ("%{}%".format(kategori),))
         result = cursor.fetchone()
         cursor.close()
         return result
@@ -42,7 +42,7 @@ class DatabaseWrapper:
     def get_category_id_by_name(self, kategori):
         cursor = self.connection.cursor(dictionary=True)
         sql = "SELECT `id_kategori` FROM `kategori_asuransi` WHERE `nama_kategori` LIKE %s LIMIT 1;"
-        cursor.execute(sql, ("%{}%".format(kategori),)) 
+        cursor.execute(sql, ("%{}%".format(kategori),))
         result = cursor.fetchone()
         cursor.close()
         return result
@@ -86,7 +86,7 @@ class DatabaseWrapper:
         cursor.execute(sql_insert_category, (nama_kategori,))
         self.connection.commit() 
         cursor.close()
-        return get_category_by_id(id_kategori)
+        return self.get_category_by_id(id_kategori)
 
     def edit_category(self, id_kategori, nama_kategori):
         cursor = self.connection.cursor(dictionary=True)
@@ -220,7 +220,6 @@ class DatabaseWrapper:
         cursor = self.connection.cursor(dictionary=True)
         res = self.get_id_car_insurance(tujuan)
         id_kategori_cek = self.get_category_id_by_name(kategori)
-        # result = 0
         result = []
         if not res: 
             sql_alternative = "SELECT * FROM `travel_insurance` WHERE `negara` LIKE %s"
@@ -319,7 +318,7 @@ class DatabaseWrapper:
 
         self.connection.commit()
         cursor.close()
-        return self.get_insurance_by_category_and_id(kategori, id_asuransi)
+        return self.get_insurance_by_category_and_id(kategori, id_insurance)
 
     def edit_insurance(self, kategori, id_tipe_asuransi, tujuan, empat, enam, delapan, sepuluh, limabelas, duapuluh, dualima, tigapuluh, setahun):
         cursor = self.connection.cursor(dictionary=True)
@@ -470,11 +469,11 @@ class DatabaseWrapper:
         
         return True
 
+
     # Harga Asuransi
 
     def get_price(self, kategori, tujuan, adult, child, start_date, end_date):
         cursor = self.connection.cursor(dictionary=True)
-        
         current_timestamp   = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         start_date          = datetime.strptime(start_date, '%Y-%m-%d')
         end_date            = datetime.strptime(end_date, '%Y-%m-%d')
@@ -513,13 +512,11 @@ class DatabaseWrapper:
             else:
                 total_bayar += tipe_asuransi['1-4']
                 days -= 4
-                
+        
         if id_kategori == 1:
             total_bayar *= jumlah_orang
-
         cursor.close()
         return total_bayar
-
 
     # Pembayaran Asuransi
 
@@ -562,7 +559,7 @@ class DatabaseWrapper:
                     result[key] = value.isoformat()
 
         return result
-    
+
     def get_latest_payment_id(self):
         cursor = self.connection.cursor(dictionary=True)
         sql = "SELECT * FROM `pembayaran_asuransi` ORDER BY `id_pembayaran` DESC  LIMIT 1"
@@ -578,7 +575,7 @@ class DatabaseWrapper:
 
         total_bayar = self.get_purchase_total_by_id(id_pembelian)
         if total_bayar is None:
-            raise ValueError("Invalid purchase ID")  # Handle invalid purchase ID case
+            raise ValueError("Invalid purchase ID")
 
         cursor = self.connection.cursor(dictionary=True)
         sql = ""
